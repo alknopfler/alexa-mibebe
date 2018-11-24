@@ -44,7 +44,7 @@ func AddBaby(context context.Context, request *alexa.Request, session *alexa.Ses
 				return
 			}
 		}else{
-			response.SetStandardCard(cfg.CardTitle, cfg.SpeechOnErrorNoRegistered, cfg.ImageSmall, cfg.ImageLong)
+			response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoRegistered, cfg.ImageSmall, cfg.ImageLong)
 			response.SetOutputText(cfg.SpeechErrorNoRegistered)
 			response.ShouldSessionEnd = true
 			return
