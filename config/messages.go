@@ -5,4 +5,5 @@ const (
 	SpeechErrorAddRecord	= "Lo siento, no he podido añadir el registro que me has pedido. Inténtalo de nuevo."
 	SpeechErrorNoName		= "Lo siento, pero el nombre del bebé no lo he reconocido. Vuelve a intentarlo por favor."
 	SpeechOnAddRecord		= "Muy bien. Has añadido correctamente el bebé."
-)
+	SpeechOnErrorNoRegistered = "Vale."
+	)

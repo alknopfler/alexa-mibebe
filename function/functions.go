@@ -18,26 +18,34 @@ func AddBaby(context context.Context, request *alexa.Request, session *alexa.Ses
 		response.ShouldSessionEnd = false
 
 	} else {
-
+		log.Println(request.Intent.ConfirmationStatus)
 		log.Println(nombre)
-		if nombre != "" {
+		if	request.Intent.ConfirmationStatus == "CONFIRMED"{
 
-			err := createRecord (newRecord(getEmail(aContext), getTimeNow(), nombre, 0,0))
-			if err != nil{
-				response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
-				response.SetOutputText(cfg.SpeechErrorAddRecord)
+			if nombre != "" {
+
+				err := createRecord (newRecord(getEmail(aContext), getTimeNow(), nombre, 0,0))
+				if err != nil{
+					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
+					response.SetOutputText(cfg.SpeechErrorAddRecord)
+					response.ShouldSessionEnd = true
+					return
+				}
+
+				response.SetStandardCard(cfg.CardTitle, cfg.SpeechOnAddRecord, cfg.ImageSmall, cfg.ImageLong)
+				response.SetOutputText(cfg.SpeechOnAddRecord)
+				response.ShouldSessionEnd = true
+				return
+
+			}else{
+				response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoName, cfg.ImageSmall, cfg.ImageLong)
+				response.SetOutputText(cfg.SpeechErrorNoName)
 				response.ShouldSessionEnd = true
 				return
 			}
-
-			response.SetStandardCard(cfg.CardTitle, cfg.SpeechOnAddRecord, cfg.ImageSmall, cfg.ImageLong)
-			response.SetOutputText(cfg.SpeechOnAddRecord)
-			response.ShouldSessionEnd = true
-			return
-
 		}else{
-			response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoName, cfg.ImageSmall, cfg.ImageLong)
-			response.SetOutputText(cfg.SpeechErrorNoName)
+			response.SetStandardCard(cfg.CardTitle, cfg.SpeechOnErrorNoRegistered, cfg.ImageSmall, cfg.ImageLong)
+			response.SetOutputText(cfg.SpeechErrorNoRegistered)
 			response.ShouldSessionEnd = true
 			return
 		}
