@@ -10,11 +10,15 @@ const(
 	ImageLong 				= "https://raw.githubusercontent.com/alknopfler/alexa-mibebe/master/images/icono500.jpg"
 
 	AddBaby					= "addBaby"
+	AddRecordPeso			= "addRecordPeso"
+	AddRecordToma			= "addRecordToma"
 )
 
 var(
 	AWS_Key 				= os.Getenv("AWS_ACCESS_KEY_ID")
 	AWS_Secret 				= os.Getenv("AWS_SECRET_ACCESS_KEY")
 	AWS_Region				= "eu-west-1"
-	DynamoTable				= "mibebe"
+	DynamoTablePeso			= "mibebe-peso"
+	DynamoTableToma			= "mibebe-toma"
+	DynamoTableName			= "mibebe-nombre"
 )

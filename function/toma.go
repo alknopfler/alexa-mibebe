@@ -1,14 +1,26 @@
 package function
 
 import (
-	"github.com/ericdaugherty/alexa-skills-kit-golang"
-	"log"
-	cfg "github.com/alknopfler/alexa-mibebe/config"
 	"context"
+	"github.com/ericdaugherty/alexa-skills-kit-golang"
+	cfg "github.com/alknopfler/alexa-mibebe/config"
+	"log"
 )
 
-func AddBaby(context context.Context, request *alexa.Request, session *alexa.Session, aContext *alexa.Context, response *alexa.Response) {
-	log.Println("register new baby")
+type RecordToma struct {
+	Email  string    `json:"email"`
+	Fecha  string	 `json:"fecha"`
+	Nombre string    `json:"nombre"`
+	Toma   float64   `json:"toma"`
+}
+
+func (r *RecordToma) newRecord(email,fecha,nombre string, toma float64) RecordToma{
+	return RecordToma{email, fecha, nombre, toma}
+}
+
+
+func (r *RecordToma) AddRecord(context context.Context, request *alexa.Request, session *alexa.Session, aContext *alexa.Context, response *alexa.Response) {
+	log.Println("register toma")
 
 	nombre := request.Intent.Slots["nombre"].Value
 
@@ -24,7 +36,7 @@ func AddBaby(context context.Context, request *alexa.Request, session *alexa.Ses
 
 			if nombre != "" {
 
-				err := createRecord (newRecord(getEmail(aContext), getTimeNow(), nombre, 0,0))
+				err := createRecord(r.newRecord(getEmail(aContext), getTimeNow(), nombre, 0), cfg.DynamoTablePeso)
 				if err != nil{
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
 					response.SetOutputText(cfg.SpeechErrorAddRecord)
@@ -52,8 +64,3 @@ func AddBaby(context context.Context, request *alexa.Request, session *alexa.Ses
 
 	}
 }
-
-func newRecord(email,fecha,nombre string, peso, toma float64) *cfg.Record{
-	return &cfg.Record{email, fecha, nombre, peso, toma}
-}
-
