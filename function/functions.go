@@ -26,16 +26,23 @@ func AddBaby(context context.Context, request *alexa.Request, session *alexa.Ses
 			if err != nil{
 				response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
 				response.SetOutputText(cfg.SpeechErrorAddRecord)
+				response.ShouldSessionEnd = true
+				return
 			}
 
 			response.SetStandardCard(cfg.CardTitle, cfg.SpeechOnAddRecord, cfg.ImageSmall, cfg.ImageLong)
 			response.SetOutputText(cfg.SpeechOnAddRecord)
+			response.ShouldSessionEnd = true
+			return
+
 		}else{
 			response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoName, cfg.ImageSmall, cfg.ImageLong)
 			response.SetOutputText(cfg.SpeechErrorNoName)
+			response.ShouldSessionEnd = true
+			return
 		}
+
 	}
-	log.Printf("Set Output speech, value now: %s", response.OutputSpeech.Text)
 }
 
 func newRecord(email,fecha,nombre string, peso, toma float64) *cfg.Record{
