@@ -40,7 +40,7 @@ func (r *RecordName) AddRecord(context context.Context, request *alexa.Request, 
 			}
 			if nombre != "" && !exists{
 
-				err := createRecord(r.newRecord(getEmail(aContext), nombre),cfg.DynamoTablePeso)
+				err := createRecord(r.newRecord(getEmail(aContext), nombre),cfg.DynamoTableName)
 				if err!= nil {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
 					response.SetOutputText(cfg.SpeechErrorAddRecord)
