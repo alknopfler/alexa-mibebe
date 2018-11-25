@@ -107,7 +107,9 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 
 	log.Println(formatNewTime(oldTime), getTimeNow())
 	result, err := getRecordsBetweenDate("fecha", "\""+formatNewTime(oldTime)+"\"", getTimeNow(),cfg.DynamoTablePeso)
-
+	if err != nil{
+		log.Println("ERror getintg records")
+	}
 	log.Println(result)
 }
 
