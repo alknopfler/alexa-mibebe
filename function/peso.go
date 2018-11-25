@@ -7,6 +7,7 @@ import (
 	"github.com/ericdaugherty/alexa-skills-kit-golang"
 	"strconv"
 	duration "github.com/alknopfler/iso8601duration"
+	"time"
 )
 
 type RecordPeso struct {
@@ -104,7 +105,8 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 			//TODO return erro
 			log.Println("error")
 		}
-		log.Println(d)
+		diff := time.Now().Add(-d.ToDuration())
+		log.Println(diff)
 	}
 
 }
