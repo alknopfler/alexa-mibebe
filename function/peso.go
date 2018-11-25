@@ -46,7 +46,10 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 				return
 			}
 			if p != "" && exists{
-				nombre, _ := getRecord("email", email, cfg.DynamoTableName)
+				nombre, err := getRecord("email", email, cfg.DynamoTableName)
+				if err!=nil{
+					log.Println("entra por error")
+				}
 				log.Println(nombre)
 				log.Println(getTimeNow())
 				log.Println(reflect.ValueOf(nombre).Elem().FieldByName("nombre").String())
