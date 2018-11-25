@@ -98,18 +98,16 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 	log.Println(ultimo)
 	log.Println(tiempo)
 
+	d, err := duration.FromString(request.Intent.Slots["tiempo"].Value)
+	if err != nil {
+		//TODO return erro
+		log.Println("error")
+	}
+	oldTime := time.Now().Add(-d.ToDuration())
 
+	result, err := getRecordsBetweenDate("fecha", formatNewTime(oldTime), getTimeNow(),cfg.DynamoTablePeso)
 
-
-		d, err := duration.FromString(request.Intent.Slots["tiempo"].Value)
-		if err != nil {
-			//TODO return erro
-			log.Println("error")
-		}
-		diff := time.Now().Add(-d.ToDuration())
-
-		log.Println("difff: "+formatNewTime(diff))
-
+	log.Println(result)
 }
 
 func formatNewTime(d time.Time) string{

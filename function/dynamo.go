@@ -112,3 +112,40 @@ func getRecordsName(key, value string) ([]RecordName, error){
 	return item, nil
 
 }
+
+func getRecordsBetweenDate(key, oldValue, newValue, dbTable string) ([]RecordName, error){
+
+	sess, err := session.NewSession(&aws.Config{Region: &cfg.AWS_Region})
+	if err != nil{
+		log.Println("Error creating session with aws: " + err.Error())
+		return nil, err
+	}
+	svc := dynamodb.New(sess)
+
+	filt := expression.Name(key).Between(expression.Value(oldValue),expression.Value(newValue))
+
+	expr, err := expression.NewBuilder().WithFilter(filt).Build()
+
+	if err != nil {
+		log.Println("Got error building expression: "+err.Error())
+		return nil, err
+	}
+
+	params := &dynamodb.ScanInput{
+		ExpressionAttributeNames:  expr.Names(),
+		ExpressionAttributeValues: expr.Values(),
+		FilterExpression:          expr.Filter(),
+		TableName:                 aws.String(dbTable),
+	}
+
+	result, err := svc.Scan(params)
+	var item []RecordName
+	err = dynamodbattribute.UnmarshalListOfMaps(result.Items, &item)
+	if err != nil {
+		log.Println("Failed to unmarshal Record: "+ err.Error())
+		return nil, err
+	}
+	log.Println(item)
+	return item, nil
+
+}
