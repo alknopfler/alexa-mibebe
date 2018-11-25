@@ -45,7 +45,7 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 				response.ShouldSessionEnd = true
 				return
 			}
-			if p != "" && !exists{
+			if p != "" && exists{
 				nombre, _ := getRecord("email", email, cfg.DynamoTableName)
 				err := createRecord(r.newRecord(email, getTimeNow(),reflect.ValueOf(nombre).Elem().FieldByName("nombre").String(), peso), cfg.DynamoTableName)
 				if err!= nil {
