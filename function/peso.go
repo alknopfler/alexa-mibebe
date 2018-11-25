@@ -24,10 +24,10 @@ func (r *RecordPeso) newRecord(email,fecha,nombre string, peso float64) RecordPe
 func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, session *alexa.Session, aContext *alexa.Context, response *alexa.Response) {
 	log.Println("register new peso")
 
-	pInt := request.Intent.Slots["pesoInt"].Value
+	pEnt := request.Intent.Slots["pesoEnt"].Value
 	pDec := request.Intent.Slots["pesoDec"].Value
-	log.Println("peso: "+pInt+","+pDec)
-	peso, _ :=  strconv.ParseFloat(pInt + "," + pDec, 64)
+	log.Println("peso: "+pEnt+","+pDec)
+	peso, _ :=  strconv.ParseFloat(pEnt + "," + pDec, 64)
 	email := getEmail(aContext)
 
 	if request.DialogState != "COMPLETED" {
@@ -46,7 +46,7 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 				response.ShouldSessionEnd = true
 				return
 			}
-			if pInt != "" && exists{
+			if pEnt != "" && exists{
 				log.Println(email)
 				listNames, err := getRecordsName("email", email)
 				if err!=nil{
@@ -65,7 +65,7 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 				return
 
 			}else{
-				if pInt == "" {
+				if pEnt == "" {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoPeso, cfg.ImageSmall, cfg.ImageLong)
 					response.SetOutputText(cfg.SpeechErrorNoPeso)
 					response.ShouldSessionEnd = true
