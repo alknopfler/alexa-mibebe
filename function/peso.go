@@ -30,7 +30,7 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 	email := getEmail(aContext)
 
 	if request.DialogState != "COMPLETED" {
-		log.Println("Get into dialog to confirm name 'addPeo intent confirmation'")
+		log.Println("Get into dialog to confirm name 'addPeso intent confirmation'")
 		response.AddDialogDirective("Dialog.Delegate", "", "", &request.Intent)
 		response.ShouldSessionEnd = false
 
