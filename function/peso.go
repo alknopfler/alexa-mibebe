@@ -57,7 +57,6 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 					response.ShouldSessionEnd = true
 					return
 				}
-
 				response.SetStandardCard(cfg.CardTitle, cfg.SpeechOnAddRecord, cfg.ImageSmall, cfg.ImageLong)
 				response.SetOutputText(cfg.SpeechOnAddRecord)
 				response.ShouldSessionEnd = true
@@ -70,8 +69,8 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 					response.ShouldSessionEnd = true
 					return
 				}
-				response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorExist, cfg.ImageSmall, cfg.ImageLong)
-				response.SetOutputText(cfg.SpeechErrorExist)
+				response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNotExist, cfg.ImageSmall, cfg.ImageLong)
+				response.SetOutputText(cfg.SpeechErrorNotExist)
 				response.ShouldSessionEnd = true
 				return
 
