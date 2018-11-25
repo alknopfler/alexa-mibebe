@@ -89,8 +89,8 @@ func getRecord(keyType, value, dbTable string) (interface{}, error){
 	result, err := svc.GetItem(&dynamodb.GetItemInput{
 		TableName: aws.String(dbTable),
 		Key: map[string]*dynamodb.AttributeValue{
-			"nombre": {
-				S: aws.String("Sergio"),
+			"email": {
+				S: aws.String("alknopfler@gmail.com"),
 			},
 		},
 	})
