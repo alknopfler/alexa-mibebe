@@ -24,8 +24,9 @@ func (r *RecordPeso) newRecord(email,fecha,nombre string, peso float64) RecordPe
 func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, session *alexa.Session, aContext *alexa.Context, response *alexa.Response) {
 	log.Println("register new peso")
 
-	p := request.Intent.Slots["peso"].Value
-	peso, _ :=  strconv.ParseFloat(p, 64)
+	pInt := request.Intent.Slots["pesoInt"].Value
+	pDec := request.Intent.Slots["pesoDec"].Value
+	peso, _ :=  strconv.ParseFloat(pInt + "," + pDec, 64)
 	email := getEmail(aContext)
 
 	if request.DialogState != "COMPLETED" {
