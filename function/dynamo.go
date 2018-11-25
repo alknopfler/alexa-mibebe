@@ -77,7 +77,7 @@ func existRecord(key, value, dbTable string) (bool,error) {
 	return false, nil
 }
 
-func getRecord(key, value, dbTable string) (interface{}, error){
+func getRecord(keyType, value, dbTable string) (interface{}, error){
 
 	sess, err := session.NewSession(&aws.Config{Region: &cfg.AWS_Region})
 	if err != nil{
@@ -89,12 +89,14 @@ func getRecord(key, value, dbTable string) (interface{}, error){
 	result, err := svc.GetItem(&dynamodb.GetItemInput{
 		TableName: aws.String(dbTable),
 		Key: map[string]*dynamodb.AttributeValue{
-			key: {
-				 S: aws.String(value),
+			"email": {
+				N: aws.String("alknopfler@gmail.com"),
+			},
+			"nombre": {
+				S: aws.String("Sergio"),
 			},
 		},
 	})
-
 	if err != nil {
 		log.Println("Error getting item: "+err.Error())
 		return nil, err
