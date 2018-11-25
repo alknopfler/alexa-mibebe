@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/dynamodb/expression"
 	cfg "github.com/alknopfler/alexa-mibebe/config"
 	"errors"
+	"github.com/guregu/dynamo"
 )
 
 func createRecord(data interface{}, dbTable string) error {
@@ -77,7 +78,7 @@ func existRecord(key, value, dbTable string) (bool,error) {
 	return false, nil
 }
 
-func getRecord(keyType, value, dbTable string) (interface{}, error){
+func getRecord(key, value, dbTable string) (interface{}, error){
 
 	sess, err := session.NewSession(&aws.Config{Region: &cfg.AWS_Region})
 	if err != nil{
@@ -86,23 +87,28 @@ func getRecord(keyType, value, dbTable string) (interface{}, error){
 	}
 	svc := dynamodb.New(sess)
 
-	result, err := svc.GetItem(&dynamodb.GetItemInput{
-		TableName: aws.String(dbTable),
-		Key: map[string]*dynamodb.AttributeValue{
-			"email": {
-				S: aws.String("alknopfler@gmail.com"),
-			},
-		},
-	})
+	filt := expression.Name(key).Equal(expression.Value(value))
+
+	expr, err := expression.NewBuilder().WithFilter(filt).Build()
+
 	if err != nil {
-		log.Println("Error getting item: "+err.Error())
-		return nil, err
+		log.Println("Got error building expression: "+err.Error())
+		return false, err
 	}
+
+	params := &dynamodb.ScanInput{
+		ExpressionAttributeNames:  expr.Names(),
+		ExpressionAttributeValues: expr.Values(),
+		FilterExpression:          expr.Filter(),
+		TableName:                 aws.String(dbTable),
+	}
+
+	result, err := svc.Scan(params)
 
 	switch dbTable {
 	case cfg.DynamoTableName:
 		var item RecordName
-		err = dynamodbattribute.UnmarshalMap(result.Item, &item)
+		err = dynamodbattribute.UnmarshalMap(result.Items[0], &item)
 		if err != nil {
 			log.Println("Failed to unmarshal Record: "+ err.Error())
 			return nil, err
@@ -112,7 +118,7 @@ func getRecord(keyType, value, dbTable string) (interface{}, error){
 		return item, nil
 	case cfg.DynamoTablePeso:
 		var item RecordPeso
-		err = dynamodbattribute.UnmarshalMap(result.Item, &item)
+		err = dynamodbattribute.UnmarshalMap(result.Items[0], &item)
 		if err != nil {
 			log.Println("Failed to unmarshal Record: "+ err.Error())
 			return nil, err
@@ -121,7 +127,7 @@ func getRecord(keyType, value, dbTable string) (interface{}, error){
 		return item, nil
 	case cfg.DynamoTableToma:
 		var item RecordToma
-		err = dynamodbattribute.UnmarshalMap(result.Item, &item)
+		err = dynamodbattribute.UnmarshalMap(result.Items[0], &item)
 		if err != nil {
 			log.Println("Failed to unmarshal Record: "+ err.Error())
 			return nil, err
