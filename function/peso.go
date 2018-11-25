@@ -106,7 +106,7 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 			log.Println("error")
 		}
 		diff := time.Now().Add(-d.ToDuration())
-		log.Println(diff)
+		log.Println("difff: "+diff.String())
 	}
 
 }
