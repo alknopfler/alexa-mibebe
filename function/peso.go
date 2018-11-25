@@ -106,11 +106,15 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 			log.Println("error")
 		}
 		diff := time.Now().Add(-d.ToDuration())
-		log.Println("difff: "+diff.String())
+
+		log.Println("difff: "+formatNewTime(diff))
 	}
 
 }
 
-
+func formatNewTime(d time.Time) string{
+	p := strconv.Itoa
+	return p(d.Year()) + "-" + p(int(d.Month())) + "-" + p(d.Day()) + "T" + p(d.Hour()) + ":" + p(d.Minute()) + ":" + p(d.Second())
+}
 
 
