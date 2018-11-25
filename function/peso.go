@@ -119,7 +119,9 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 	}
 	var peso float64 = 0
 	for _,val := range listPesos{
+		log.Println(val.Fecha)
 		tVal, _ := ShortDateFromString(val.Fecha)
+		log.Println(tVal.String())
 		if tVal.After(tOldTime) && tVal.Before(tNewTime) {
 			peso += val.Peso
 		}else{
