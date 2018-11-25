@@ -8,6 +8,7 @@ import (
 	"strconv"
 	duration "github.com/alknopfler/iso8601duration"
 	"time"
+	"github.com/joeshaw/iso8601"
 )
 
 type RecordPeso struct {
@@ -106,7 +107,9 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 		log.Println("error")
 	}
 	oldTime := formatNewTime(time.Now().Add(-d.ToDuration()))
+	tOldTime, _ := ShortDateFromString(oldTime)
 	newTime := getTimeNow()
+	tNewTime, _ := ShortDateFromString(newTime)
 	log.Println(oldTime, newTime)
 
 	//result, err := getRecordsBetweenDate("fecha", "\""+formatNewTime(oldTime)+"\"", getTimeNow(),cfg.DynamoTablePeso)
@@ -116,7 +119,8 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 	}
 	var peso float64 = 0
 	for _,val := range listPesos{
-		if val.Fecha >= oldTime && val.Fecha =< newTime {
+		tVal, _ := ShortDateFromString(val.Fecha)
+		if tVal.After(tOldTime) && tVal.Before(tNewTime) {
 			peso += val.Peso
 		}else{
 			log.Println("entra por else")
@@ -130,4 +134,11 @@ func formatNewTime(d time.Time) string{
 	return p(d.Year()) + "-" + p(int(d.Month())) + "-" + p(d.Day()) + "T" + p(d.Hour()) + ":" + p(d.Minute()) + ":" + p(d.Second())
 }
 
+func ShortDateFromString(ds string) (time.Time, error) {
+	t, err := time.Parse(iso8601.Format, ds)
+	if err != nil {
+		return t, err
+	}
+	return t, nil
+}
 
