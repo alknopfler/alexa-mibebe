@@ -90,7 +90,7 @@ func getRecord(key, value, dbTable string) (interface{}, error){
 		TableName: aws.String(dbTable),
 		Key: map[string]*dynamodb.AttributeValue{
 			key: {
-				N: aws.String(value),
+				 N: aws.String(value),
 			},
 		},
 	})
@@ -108,6 +108,7 @@ func getRecord(key, value, dbTable string) (interface{}, error){
 			log.Println("Failed to unmarshal Record: "+ err.Error())
 			return nil, err
 		}
+		log.Println(item)
 		return item, nil
 	case cfg.DynamoTablePeso:
 		var item RecordPeso
@@ -116,6 +117,7 @@ func getRecord(key, value, dbTable string) (interface{}, error){
 			log.Println("Failed to unmarshal Record: "+ err.Error())
 			return nil, err
 		}
+		log.Println(item)
 		return item, nil
 	case cfg.DynamoTableToma:
 		var item RecordToma
