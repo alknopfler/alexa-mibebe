@@ -37,7 +37,9 @@
   branch = "master"
   name = "github.com/joeshaw/iso8601"
 
-
+[[constraint]]
+  branch = "master"
+  name = "github.com/alknopfler/iso8601duration"
 
 [prune]
   go-tests = true

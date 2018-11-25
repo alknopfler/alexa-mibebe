@@ -6,6 +6,7 @@ import (
 	"context"
 	"github.com/ericdaugherty/alexa-skills-kit-golang"
 	"strconv"
+	duration "github.com/alknopfler/iso8601duration"
 )
 
 type RecordPeso struct {
@@ -92,6 +93,17 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 
 	log.Println(request.Intent.Slots["ultimo"].Value)
 	log.Println(request.Intent.Slots["tiempo"].Value)
+
+	ultimo := request.Intent.Slots["ultimo"].Value
+	tiempo := request.Intent.Slots["tiempo"].Value
+
+	if tiempo != ""{
+		d, err := duration.FromString(request.Intent.Slots["tiempo"].Value)
+		if err != nil {
+			//TODO return erro
+		}
+		log.Println(d)
+	}
 
 }
 

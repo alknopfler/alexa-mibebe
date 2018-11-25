@@ -41,11 +41,83 @@
         },
         {
           "name": "addPeso",
+          "slots": [
+            {
+              "name": "kilos",
+              "type": "AMAZON.NUMBER",
+              "samples": [
+                "{kilos}"
+              ]
+            },
+            {
+              "name": "gramos",
+              "type": "AMAZON.NUMBER",
+              "samples": [
+                "{gramos}"
+              ]
+            }
+          ],
+          "samples": [
+            "añade un nuevo peso de {kilos} con {gramos} "
+          ]
+        },
+        {
+          "name": "addToma",
+          "slots": [
+            {
+              "name": "mililitros",
+              "type": "AMAZON.NUMBER",
+              "samples": [
+                "{mililitros}"
+              ]
+            }
+          ],
+          "samples": [
+            "añade una nueva toma de {mililitros}"
+          ]
+        },
+        {
+          "name": "getBaby",
           "slots": [],
-          "samples": []
+          "samples": [
+            "quiero saber el nombre de ",
+            "cuál es el nombre de ",
+            "dime el nombre de "
+          ]
+        },
+        {
+          "name": "getPeso",
+          "slots": [
+            {
+              "name": "ultimo",
+              "type": "ultimo"
+            },
+            {
+              "name": "tiempo",
+              "type": "AMAZON.DURATION"
+            }
+          ],
+          "samples": [
+            "dime el {ultimo} peso del {tiempo} de",
+            "dime el {ultimo} peso de {tiempo} de "
+          ]
         }
       ],
-      "types": []
+      "types": [
+        {
+          "name": "ultimo",
+          "values": [
+            {
+              "name": {
+                "value": "ultimo",
+                "synonyms": [
+                  "último"
+                ]
+              }
+            }
+          ]
+        }
+      ]
     },
     "dialog": {
       "intents": [
@@ -66,6 +138,51 @@
               }
             }
           ]
+        },
+        {
+          "name": "addPeso",
+          "confirmationRequired": true,
+          "prompts": {
+            "confirmation": "Confirm.Intent.683160885739"
+          },
+          "slots": [
+            {
+              "name": "kilos",
+              "type": "AMAZON.NUMBER",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1486998774410.1078026956893"
+              }
+            },
+            {
+              "name": "gramos",
+              "type": "AMAZON.NUMBER",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1486998774410.4437798725"
+              }
+            }
+          ]
+        },
+        {
+          "name": "addToma",
+          "confirmationRequired": true,
+          "prompts": {
+            "confirmation": "Confirm.Intent.1160576600779"
+          },
+          "slots": [
+            {
+              "name": "mililitros",
+              "type": "AMAZON.NUMBER",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1160576600779.54861166103"
+              }
+            }
+          ]
         }
       ]
     },
@@ -75,7 +192,7 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "¿Estás seguro que quieres añadir el bebé para hacer el seguimiento?"
+            "value": "¿Estás seguro que quieres añadir a {nombre} para hacer el seguimiento?"
           }
         ]
       },
@@ -85,6 +202,60 @@
           {
             "type": "PlainText",
             "value": "¿Cuál es el nombre de tu bebé?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.24501359037.1065870585566",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿Cúal es el peso de tu bebé?"
+          }
+        ]
+      },
+      {
+        "id": "Confirm.Intent.683160885739",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿De verdad quieres añadir {kilos} con {gramos} kilos como peso ?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1486998774410.1078026956893",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Dime el número de kilos, sin la parte de gramos"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1486998774410.4437798725",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Dime la parte de los gramos"
+          }
+        ]
+      },
+      {
+        "id": "Confirm.Intent.1160576600779",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿De verdad quieres añadir la toma de {mililitros} de tu bebé?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1160576600779.54861166103",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Dime los mililitros de la toma "
           }
         ]
       }
