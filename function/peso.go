@@ -116,7 +116,7 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 	}
 	var peso float64 = 0
 	for _,val := range listPesos{
-		if val.Fecha > oldTime && val.Fecha < newTime {
+		if val.Fecha >= oldTime && val.Fecha =< newTime {
 			peso += val.Peso
 		}else{
 			log.Println("entra por else")
