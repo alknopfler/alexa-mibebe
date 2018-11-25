@@ -6,10 +6,11 @@ import (
 	"context"
 	"github.com/ericdaugherty/alexa-skills-kit-golang"
 	"strconv"
-	duration "github.com/alknopfler/iso8601duration"
+	"github.com/alknopfler/iso8601duration"
 	"time"
-	"github.com/joeshaw/iso8601"
 )
+
+const parser = "2006-01-02T15:04:05-0700"
 
 type RecordPeso struct {
 	Email  string    `json:"email"`
@@ -107,9 +108,9 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 		log.Println("error")
 	}
 	oldTime := formatNewTime(time.Now().Add(-d.ToDuration()))
-	tOldTime, _ := ShortDateFromString(oldTime)
+	tOldTime := strconv.FormatInt(time.Now().Add(-d.ToDuration()).UTC().UnixNano(),10)
 	newTime := getTimeNow()
-	tNewTime, _ := ShortDateFromString(newTime)
+	tNewTime := strconv.FormatInt(time.Now().UTC().UnixNano(),10)
 	log.Println(oldTime, newTime)
 
 	//result, err := getRecordsBetweenDate("fecha", "\""+formatNewTime(oldTime)+"\"", getTimeNow(),cfg.DynamoTablePeso)
@@ -119,10 +120,8 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 	}
 	var peso float64 = 0
 	for _,val := range listPesos{
-		log.Println(val.Fecha)
-		tVal, _ := ShortDateFromString(val.Fecha)
-		log.Println(tVal.String())
-		if tVal.After(tOldTime) && tVal.Before(tNewTime) {
+		tVal := strconv.FormatInt(ShortDateFromString(val.Fecha).UTC().UnixNano(),10)
+		if tVal > tOldTime && tVal <= tNewTime {
 			peso += val.Peso
 		}else{
 			log.Println("entra por else")
@@ -136,12 +135,7 @@ func formatNewTime(d time.Time) string{
 	return p(d.Year()) + "-" + p(int(d.Month())) + "-" + p(d.Day()) + "T" + p(d.Hour()) + ":" + p(d.Minute()) + ":" + p(d.Second())
 }
 
-func ShortDateFromString(ds string) (time.Time, error) {
-	t, err := time.Parse(iso8601.Format, ds)
-	if err != nil {
-		log.Println("error de short")
-		return t, err
-	}
-	return t, nil
+func ShortDateFromString(ds string) time.Time {
+ 	date, _ := time.Parse(parser, ds)
+ 	return date
 }
-
