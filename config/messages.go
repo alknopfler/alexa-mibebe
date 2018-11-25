@@ -7,5 +7,6 @@ const (
 	SpeechErrorNotExist		= "Lo siento, no existe un bebé registrado con tu cuenta. Pídeme registrarlo y así podemos empezar a guardar datos."
 	SpeechErrorNoName		= "Lo siento, pero el nombre del bebé no lo he reconocido. Vuelve a intentarlo por favor."
 	SpeechOnAddRecord		= "Muy bien. Has añadido correctamente el bebé."
+	SpeechOnAddPeso			= "Muy bien, he registrado el nuevo peso de tu bebé."
 	SpeechErrorNoRegistered = "Vale."
 	)
