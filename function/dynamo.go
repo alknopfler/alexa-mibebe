@@ -107,6 +107,7 @@ func getRecord(keyType, value, dbTable string) (interface{}, error){
 			log.Println("Failed to unmarshal Record: "+ err.Error())
 			return nil, err
 		}
+		log.Println("EL ITEM ES: ")
 		log.Println(item)
 		return item, nil
 	case cfg.DynamoTablePeso:
