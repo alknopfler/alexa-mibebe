@@ -99,7 +99,8 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 	log.Println(tiempo)
 
 
-	if tiempo != ""{
+	if tiempo != "" && tiempo != {
+
 		d, err := duration.FromString(request.Intent.Slots["tiempo"].Value)
 		if err != nil {
 			//TODO return erro
