@@ -45,7 +45,7 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 				response.ShouldSessionEnd = true
 				return
 			}
-			if p != "" && exists{
+			if pInt != "" && exists{
 				log.Println(email)
 				listNames, err := getRecordsName("email", email)
 				if err!=nil{
@@ -64,9 +64,9 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 				return
 
 			}else{
-				if p == "" {
-					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoName, cfg.ImageSmall, cfg.ImageLong)
-					response.SetOutputText(cfg.SpeechErrorNoName)
+				if pInt == "" {
+					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoPeso, cfg.ImageSmall, cfg.ImageLong)
+					response.SetOutputText(cfg.SpeechErrorNoPeso)
 					response.ShouldSessionEnd = true
 					return
 				}
