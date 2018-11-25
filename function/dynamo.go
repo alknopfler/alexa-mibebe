@@ -90,7 +90,7 @@ func getRecord(keyType, value, dbTable string) (interface{}, error){
 		TableName: aws.String(dbTable),
 		Key: map[string]*dynamodb.AttributeValue{
 			"email": {
-				S: aws.String("alknopfler@gmail.com"),
+				S: aws.String("\"alknopfler@gmail.com\""),
 			},
 			"nombre": {
 				S: aws.String("Sergio"),
