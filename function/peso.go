@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-const parser = "2006-01-02T15:04:05-0700"
+const parser = "2006-01-02T15:04:05"
 
 type RecordPeso struct {
 	Email  string    `json:"email"`
