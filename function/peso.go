@@ -12,13 +12,12 @@ import (
 type RecordPeso struct {
 	Email  string    `json:"email"`
 	Fecha  string	 `json:"fecha"`
-	Nombre string    `json:"nombre"`
 	Peso   float64   `json:"peso"`
 }
 
 
 func (r *RecordPeso) newRecord(email,fecha,nombre string, peso float64) RecordPeso{
-	return RecordPeso{email, fecha, nombre, peso}
+	return RecordPeso{email, fecha, peso}
 }
 
 
@@ -46,6 +45,7 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 				return
 			}
 			if p != "" && exists{
+				log.Println(email)
 				nombre, err := getRecord("email", email, cfg.DynamoTableName)
 				if err!=nil{
 					log.Println("entra por error")
