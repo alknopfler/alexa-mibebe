@@ -1,0 +1,93 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "mi bebé",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "addBaby",
+          "slots": [
+            {
+              "name": "nombre",
+              "type": "AMAZON.FirstName",
+              "samples": [
+                "{nombre}"
+              ]
+            }
+          ],
+          "samples": [
+            "me gustaría añadir a {nombre}",
+            "me gustaría registrar a {nombre}",
+            "registra a {nombre}",
+            "añade a {nombre}",
+            "quiero añadir a {nombre}",
+            "quiero registrar a {nombre}"
+          ]
+        },
+        {
+          "name": "addPeso",
+          "slots": [],
+          "samples": []
+        }
+      ],
+      "types": []
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "addBaby",
+          "confirmationRequired": true,
+          "prompts": {
+            "confirmation": "Confirm.Intent.373945927743"
+          },
+          "slots": [
+            {
+              "name": "nombre",
+              "type": "AMAZON.FirstName",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.104148444268.1142189023295"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "prompts": [
+      {
+        "id": "Confirm.Intent.373945927743",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿Estás seguro que quieres añadir el bebé para hacer el seguimiento?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.104148444268.1142189023295",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "¿Cuál es el nombre de tu bebé?"
+          }
+        ]
+      }
+    ]
+  }
+}

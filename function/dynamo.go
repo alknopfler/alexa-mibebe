@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
 	"github.com/aws/aws-sdk-go/service/dynamodb/expression"
 	cfg "github.com/alknopfler/alexa-mibebe/config"
+	"errors"
 )
 
 func createRecord(data interface{}, dbTable string) error {
@@ -39,7 +40,7 @@ func createRecord(data interface{}, dbTable string) error {
 }
 
 
-func existRecord(key, value string, dbTable string) (bool,error) {
+func existRecord(key, value, dbTable string) (bool,error) {
 	sess, err := session.NewSession(&aws.Config{Region: &cfg.AWS_Region})
 	if err != nil{
 		log.Println("Error creating session with aws: " + err.Error())
@@ -74,4 +75,57 @@ func existRecord(key, value string, dbTable string) (bool,error) {
 		return true, nil
 	}
 	return false, nil
+}
+
+func getRecord(key, value, dbTable string) (interface{}, error){
+
+	sess, err := session.NewSession(&aws.Config{Region: &cfg.AWS_Region})
+	if err != nil{
+		log.Println("Error creating session with aws: " + err.Error())
+		return nil, err
+	}
+	svc := dynamodb.New(sess)
+
+	result, err := svc.GetItem(&dynamodb.GetItemInput{
+		TableName: aws.String(dbTable),
+		Key: map[string]*dynamodb.AttributeValue{
+			key: {
+				N: aws.String(value),
+			},
+		},
+	})
+
+	if err != nil {
+		log.Println("Error getting item: "+err.Error())
+		return nil, err
+	}
+
+	switch dbTable {
+	case cfg.DynamoTableName:
+		var item RecordName
+		err = dynamodbattribute.UnmarshalMap(result.Item, &item)
+		if err != nil {
+			log.Println("Failed to unmarshal Record: "+ err.Error())
+			return nil, err
+		}
+		return item, nil
+	case cfg.DynamoTablePeso:
+		var item RecordPeso
+		err = dynamodbattribute.UnmarshalMap(result.Item, &item)
+		if err != nil {
+			log.Println("Failed to unmarshal Record: "+ err.Error())
+			return nil, err
+		}
+		return item, nil
+	case cfg.DynamoTableToma:
+		var item RecordToma
+		err = dynamodbattribute.UnmarshalMap(result.Item, &item)
+		if err != nil {
+			log.Println("Failed to unmarshal Record: "+ err.Error())
+			return nil, err
+		}
+		return item, nil
+	default:
+		return nil, errors.New("Error item not found")
+	}
 }
