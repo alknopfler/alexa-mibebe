@@ -11,12 +11,13 @@ import (
 type RecordPeso struct {
 	Email  string    `json:"email"`
 	Fecha  string	 `json:"fecha"`
+	Nombre string    `json:"nombre"`
 	Peso   float64   `json:"peso"`
 }
 
 
 func (r *RecordPeso) newRecord(email,fecha,nombre string, peso float64) RecordPeso{
-	return RecordPeso{email, fecha, peso}
+	return RecordPeso{email, fecha, nombre, peso}
 }
 
 
