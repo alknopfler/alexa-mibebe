@@ -48,22 +48,22 @@ func (r *RecordToma) AddRecord(context context.Context, request *alexa.Request, 
 				if err!=nil{
 					log.Println("entra por error")
 				}
-				err = createRecord(r.newRecord(email, getTimeNow(),listNames[0].Nombre, peso), cfg.DynamoTablePeso)
+				err = createRecord(r.newRecord(email, getTimeNow(),listNames[0].Nombre, ml), cfg.DynamoTableToma)
 				if err!= nil {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
 					response.SetOutputText(cfg.SpeechErrorAddRecord)
 					response.ShouldSessionEnd = true
 					return
 				}
-				response.SetStandardCard(cfg.CardTitle, cfg.SpeechOnAddPeso, cfg.ImageSmall, cfg.ImageLong)
-				response.SetOutputText(cfg.SpeechOnAddPeso)
+				response.SetStandardCard(cfg.CardTitle, cfg.SpeechOnAddToma, cfg.ImageSmall, cfg.ImageLong)
+				response.SetOutputText(cfg.SpeechOnAddToma)
 				response.ShouldSessionEnd = true
 				return
 
 			}else{
 				if ml == 0 {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoPeso, cfg.ImageSmall, cfg.ImageLong)
-					response.SetOutputText(cfg.SpeechErrorNoPeso)
+					response.SetOutputText(cfg.SpeechErrorNoToma)
 					response.ShouldSessionEnd = true
 					return
 				}
