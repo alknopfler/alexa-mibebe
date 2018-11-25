@@ -76,12 +76,12 @@ func existRecord(key, value, dbTable string) (bool,error) {
 	return false, nil
 }
 
-func getRecordsName(key, value string) (RecordName, error){
+func getRecordsName(key, value string) ([]RecordName, error){
 
 	sess, err := session.NewSession(&aws.Config{Region: &cfg.AWS_Region})
 	if err != nil{
 		log.Println("Error creating session with aws: " + err.Error())
-		return RecordName{}, err
+		return nil, err
 	}
 	svc := dynamodb.New(sess)
 
@@ -91,7 +91,7 @@ func getRecordsName(key, value string) (RecordName, error){
 
 	if err != nil {
 		log.Println("Got error building expression: "+err.Error())
-		return RecordName{}, err
+		return nil, err
 	}
 
 	params := &dynamodb.ScanInput{
@@ -102,11 +102,11 @@ func getRecordsName(key, value string) (RecordName, error){
 	}
 
 	result, err := svc.Scan(params)
-	var item RecordName
-	err = dynamodbattribute.UnmarshalMap(result.LastEvaluatedKey, &item)
+	var item []RecordName
+	err = dynamodbattribute.UnmarshalListOfMaps(result.Items, &item)
 	if err != nil {
 		log.Println("Failed to unmarshal Record: "+ err.Error())
-		return RecordName{}, err
+		return nil, err
 	}
 	log.Println(item)
 	return item, nil
