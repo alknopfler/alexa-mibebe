@@ -139,6 +139,7 @@ func formatNewTime(d time.Time) string{
 func ShortDateFromString(ds string) (time.Time, error) {
 	t, err := time.Parse(iso8601.Format, ds)
 	if err != nil {
+		log.Println("error de short")
 		return t, err
 	}
 	return t, nil
