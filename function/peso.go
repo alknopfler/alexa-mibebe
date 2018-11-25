@@ -27,7 +27,7 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 	pEnt := request.Intent.Slots["kilos"].Value
 	pDec := request.Intent.Slots["gramos"].Value
 	log.Println("peso: "+pEnt+","+pDec)
-	peso, _ :=  strconv.ParseFloat(pEnt + "," + pDec, 64)
+	peso, _ :=  strconv.ParseFloat(pEnt + "." + pDec, 64)
 	email := getEmail(aContext)
 
 	if request.DialogState != "COMPLETED" {
