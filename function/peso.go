@@ -47,6 +47,10 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 			}
 			if p != "" && exists{
 				nombre, _ := getRecord("email", email, cfg.DynamoTableName)
+				log.Println(nombre)
+				log.Println(getTimeNow())
+				log.Println(reflect.ValueOf(nombre).Elem().FieldByName("nombre").String())
+				log.Println(peso)
 				err := createRecord(r.newRecord(email, getTimeNow(),reflect.ValueOf(nombre).Elem().FieldByName("nombre").String(), peso), cfg.DynamoTableName)
 				if err!= nil {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
