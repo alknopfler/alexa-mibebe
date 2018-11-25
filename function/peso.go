@@ -99,7 +99,7 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 	log.Println(tiempo)
 
 
-	if tiempo != "" && tiempo != {
+
 
 		d, err := duration.FromString(request.Intent.Slots["tiempo"].Value)
 		if err != nil {
@@ -109,7 +109,6 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 		diff := time.Now().Add(-d.ToDuration())
 
 		log.Println("difff: "+formatNewTime(diff))
-	}
 
 }
 
