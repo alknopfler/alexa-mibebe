@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go/service/dynamodb/expression"
 	cfg "github.com/alknopfler/alexa-mibebe/config"
 	"errors"
-	"github.com/guregu/dynamo"
 )
 
 func createRecord(data interface{}, dbTable string) error {
