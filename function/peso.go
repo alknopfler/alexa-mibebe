@@ -102,6 +102,7 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 		d, err := duration.FromString(request.Intent.Slots["tiempo"].Value)
 		if err != nil {
 			//TODO return erro
+			log.Println("error")
 		}
 		log.Println(d)
 	}
