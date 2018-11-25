@@ -25,7 +25,7 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 	log.Println("register new peso")
 
 	pEnt := request.Intent.Slots["pesoEnt"].Value
-	pDec := request.Intent.Slots["pesoDec"].Value
+	pDec := request.Intent.Slots["pesoDecimal"].Value
 	log.Println("peso: "+pEnt+","+pDec)
 	peso, _ :=  strconv.ParseFloat(pEnt + "," + pDec, 64)
 	email := getEmail(aContext)
