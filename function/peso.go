@@ -121,7 +121,12 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 	var peso float64 = 0
 	for _,val := range listPesos{
 		tVal := strconv.FormatInt(ShortDateFromString(val.Fecha).UTC().UnixNano(),10)
-		if tVal > tOldTime && tVal <= tNewTime {
+		log.Println(tVal)
+		a, _ := strconv.Atoi(tVal)
+		b, _ := strconv.Atoi(tOldTime)
+		c, _ := strconv.Atoi(tVal)
+		d, _ := strconv.Atoi(tNewTime)
+		if a > b && c <= d {
 			peso += val.Peso
 		}else{
 			log.Println("entra por else")
