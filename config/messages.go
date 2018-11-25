@@ -12,4 +12,5 @@ const (
 	SpeechOnAddPeso			= "Muy bien, he registrado el nuevo peso de tu bebé."
 	SpeechOnAddToma			= "Muy bien, he registrado la nueva toma de tu bebé."
 	SpeechErrorNoRegistered = "Vale."
+	SpeechNameis			= "El nombre del bebé registrado es: "
 	)

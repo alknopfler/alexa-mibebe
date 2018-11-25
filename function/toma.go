@@ -82,3 +82,5 @@ func (r *RecordToma) AddRecord(context context.Context, request *alexa.Request, 
 
 	}
 }
+
+func (r *RecordToma) GetRecord(context context.Context, request *alexa.Request, session *alexa.Session, aContext *alexa.Context, response *alexa.Response){}

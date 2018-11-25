@@ -76,6 +76,22 @@ func (r *RecordName) AddRecord(context context.Context, request *alexa.Request, 
 	}
 }
 
+func (r *RecordName) GetRecord(context context.Context, request *alexa.Request, session *alexa.Session, aContext *alexa.Context, response *alexa.Response) {
+	log.Println("Get baby name")
 
-func (r *RecordName) Exists() {
+	listNames, err := getRecordsName("email", getEmail(aContext))
+	if err!=nil{
+		log.Println("entra por error")
+	}
+	if len(listNames)==1 {
+		response.SetStandardCard(cfg.CardTitle, cfg.SpeechNameis, cfg.ImageSmall, cfg.ImageLong)
+		response.SetOutputText(cfg.SpeechNameis + " " + listNames[0].Nombre)
+		response.ShouldSessionEnd = true
+		return
+	}else{
+		response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNotExist, cfg.ImageSmall, cfg.ImageLong)
+		response.SetOutputText(cfg.SpeechErrorNotExist)
+		response.ShouldSessionEnd = true
+		return
+	}
 }

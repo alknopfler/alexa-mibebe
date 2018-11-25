@@ -51,12 +51,21 @@ func (h *MiBebe) OnIntent(context context.Context, request *alexa.Request, sessi
 	case cfg.AddBaby:
 		var f f.RecordName
 		f.AddRecord(context, request, session, aContext, response)
+	case cfg.GetBaby:
+		var f f.RecordName
+		f.GetRecord(context, request, session, aContext, response)
 	case cfg.AddRecordPeso:
 		var f f.RecordPeso
 		f.AddRecord(context, request, session, aContext, response)
+	case cfg.GetRecordPeso:
+		var f f.RecordPeso
+		f.GetRecord(context, request, session, aContext, response)
 	case cfg.AddRecordToma:
 		var f f.RecordToma
 		f.AddRecord(context, request, session, aContext, response)
+	case cfg.GetRecordToma:
+		var f f.RecordToma
+		f.GetRecord(context, request, session, aContext, response)
 	default:
 		return errors.New("Invalid Intent")
 	}

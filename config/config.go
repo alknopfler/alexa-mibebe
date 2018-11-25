@@ -12,6 +12,9 @@ const(
 	AddBaby					= "addBaby"
 	AddRecordPeso			= "addPeso"
 	AddRecordToma			= "addToma"
+	GetBaby					= "getBaby"
+	GetRecordPeso			= "getPeso"
+	GetRecordToma			= "getToma"
 )
 
 var(
