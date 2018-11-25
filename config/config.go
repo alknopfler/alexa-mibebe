@@ -10,8 +10,8 @@ const(
 	ImageLong 				= "https://raw.githubusercontent.com/alknopfler/alexa-mibebe/master/images/icono500.jpg"
 
 	AddBaby					= "addBaby"
-	AddRecordPeso			= "addRecordPeso"
-	AddRecordToma			= "addRecordToma"
+	AddRecordPeso			= "addPeso"
+	AddRecordToma			= "addToma"
 )
 
 var(
