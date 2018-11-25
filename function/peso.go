@@ -5,7 +5,6 @@ import (
 	"log"
 	"context"
 	"github.com/ericdaugherty/alexa-skills-kit-golang"
-	"reflect"
 	"strconv"
 )
 
@@ -46,15 +45,11 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 			}
 			if p != "" && exists{
 				log.Println(email)
-				nombre, err := getRecord("email", email, cfg.DynamoTableName)
+				nombre, err := getRecordsName("email", email)
 				if err!=nil{
 					log.Println("entra por error")
 				}
-				log.Println(nombre)
-				log.Println(getTimeNow())
-				log.Println(reflect.ValueOf(nombre).Elem().FieldByName("nombre").String())
-				log.Println(peso)
-				err = createRecord(r.newRecord(email, getTimeNow(),reflect.ValueOf(nombre).Elem().FieldByName("nombre").String(), peso), cfg.DynamoTableName)
+				err = createRecord(r.newRecord(email, getTimeNow(),nombre.Nombre, peso), cfg.DynamoTableName)
 				if err!= nil {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
 					response.SetOutputText(cfg.SpeechErrorAddRecord)
