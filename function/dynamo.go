@@ -145,7 +145,7 @@ func getRecordsPeso(key, value, oldTime, newTime string) ([]RecordPeso, error){
 			},
 
 		},
-		FilterExpression:          aws.String("fecha > :fo && fecha < :fn"),
+		FilterExpression:          aws.String("fecha > :fo"),
 		TableName:                 aws.String(cfg.DynamoTablePeso),
 	}
 
