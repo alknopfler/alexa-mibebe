@@ -8,8 +8,7 @@ import (
 	"crypto/tls"
 	"io"
 	"time"
-	"encoding/json"
-	"github.com/joeshaw/iso8601"
+
 )
 
 func getEmail(aContext *alexa.Context) string{
