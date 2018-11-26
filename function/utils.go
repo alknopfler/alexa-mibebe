@@ -9,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"time"
+	"strings"
 )
 
 func getEmail(aContext *alexa.Context) string{
@@ -45,4 +46,9 @@ func formatNewTime(d time.Time) string{
 
 func getTimestamp() string {
 	return time.Now().Format("20060102150405")
+}
+
+func splitFloat(f string) (string,string){
+	r := strings.Split(f,".")
+	return r[0],r[1]
 }

@@ -113,10 +113,11 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 	for _, val := range listPesos{
 		peso += val.Peso
 	}
-	pkilos := peso / 1.000
 
-	response.SetStandardCard(cfg.CardTitle, cfg.SpeechTotalPeso + fmt.Sprintf("%f", peso) + " kilogramos", cfg.ImageSmall, cfg.ImageLong)
-	response.SetOutputText(cfg.SpeechTotalPeso + fmt.Sprintf("%.3f", pkilos) + " kilogramos")
+	kilos, gramos := splitFloat(fmt.Sprintf("%3f", peso))
+
+	response.SetStandardCard(cfg.CardTitle, cfg.SpeechTotalPeso + kilos + " kilogramos" + " con "+ gramos + " gramos", cfg.ImageSmall, cfg.ImageLong)
+	response.SetOutputText(cfg.SpeechTotalPeso + kilos + " kilogramos" + " con "+ gramos + " gramos")
 	response.ShouldSessionEnd = true
 	return
 
