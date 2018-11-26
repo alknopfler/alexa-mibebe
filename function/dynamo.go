@@ -124,8 +124,9 @@ func getRecordsPeso(key, value, oldTime, newTime string) ([]RecordPeso, error){
 	svc := dynamodb.New(sess)
 
 	filt := expression.Name("fecha").Between(expression.Value(oldTime),expression.Value(newTime)).And(expression.Name("nombre").Equal(expression.Value(value)))
+	proj := expression.NamesList(expression.Name("email"), expression.Name("fecha"), expression.Name("nombre"), expression.Name("peso"))
 
-	expr, err := expression.NewBuilder().WithFilter(filt).Build()
+	expr, err := expression.NewBuilder().WithFilter(filt).WithProjection(proj).Build()
 
 	if err != nil {
 		log.Println("Got error building expression: "+err.Error())
