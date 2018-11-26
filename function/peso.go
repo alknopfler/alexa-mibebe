@@ -114,8 +114,10 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 		peso += val.Peso
 	}
 
+	pkilos := peso / 1000
+
 	response.SetStandardCard(cfg.CardTitle, cfg.SpeechTotalPeso + fmt.Sprintf("%f", peso) + " kilogramos", cfg.ImageSmall, cfg.ImageLong)
-	response.SetOutputText(cfg.SpeechTotalPeso + fmt.Sprintf("%.3f", peso) + " kilogramos")
+	response.SetOutputText(cfg.SpeechTotalPeso + fmt.Sprintf("%.3f", pkilos) + " kilogramos")
 	response.ShouldSessionEnd = true
 	return
 
