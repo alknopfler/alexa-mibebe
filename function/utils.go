@@ -36,11 +36,12 @@ func doRequestOauth(method, apiURL, tokenBearer string, body io.Reader ) *http.R
 }
 
 func getTimeNow() string {
-	t := time.Now()
+	return time.Now().UTC().String()
 
-	// ISO8601 JSON format
+	/*// ISO8601 JSON format
 	// "2014-03-25T16:15:25"
 	data, _ := json.Marshal(iso8601.Time(t))
 	return string(data)
+	*/
 }
 
