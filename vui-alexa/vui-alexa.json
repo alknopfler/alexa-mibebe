@@ -89,17 +89,18 @@
           "name": "getPeso",
           "slots": [
             {
-              "name": "ultimo",
-              "type": "ultimo"
-            },
-            {
               "name": "tiempo",
               "type": "AMAZON.DURATION"
             }
           ],
           "samples": [
-            "dime el {ultimo} peso del {tiempo} de",
-            "dime el {ultimo} peso de {tiempo} de "
+            "dime el peso acumulado desde hace {tiempo} de",
+            "dime el peso desde hace {tiempo} de",
+            "dime el peso total en {tiempo} de",
+            "dime el peso acumulado en {tiempo} de",
+            "dime el peso acumulado desde {tiempo} de",
+            "dime el peso desde {tiempo} de ",
+            "dime el peso en {tiempo} de"
           ]
         }
       ],
