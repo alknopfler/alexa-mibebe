@@ -120,7 +120,7 @@ func (r *RecordToma) GetRecord(context context.Context, request *alexa.Request, 
 		toma += val.Toma
 	}
 	response.SetStandardCard(cfg.CardTitle, cfg.SpeechTotalToma + strconv.Itoa(toma) + " mililitros", cfg.ImageSmall, cfg.ImageLong)
-	response.SetOutputText(cfg.SpeechTotalPeso + strconv.Itoa(toma) + " mililitros")
+	response.SetOutputText(cfg.SpeechTotalToma + strconv.Itoa(toma) + " mililitros")
 	response.ShouldSessionEnd = true
 	return
 
