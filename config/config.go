@@ -15,6 +15,7 @@ const(
 	GetBaby					= "getBaby"
 	GetRecordPeso			= "getPeso"
 	GetRecordToma			= "getToma"
+	GetRecordTomaHoy		= "getTomaHoy"
 )
 
 var(

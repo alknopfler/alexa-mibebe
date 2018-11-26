@@ -11,14 +11,15 @@ import (
 )
 
 type RecordToma struct {
-	Email  string    `json:"email"`
-	Fecha  string	 `json:"fecha"`
-	Nombre string    `json:"nombre"`
-	Toma   int   	 `json:"toma"`
+	Email  		string    	`json:"email"`
+	Timestamp	string		`json:"timestamp"`
+	Fecha  		string	    `json:"fecha"`
+	Nombre 		string      `json:"nombre"`
+	Toma   		int     	`json:"toma"`
 }
 
-func (r *RecordToma) newRecord(email,fecha,nombre string, toma int) RecordToma{
-	return RecordToma{email, fecha, nombre, toma}
+func (r *RecordToma) newRecord(email, timestamp, fecha, nombre string, toma int) RecordToma{
+	return RecordToma{email, timestamp, fecha, nombre, toma}
 }
 
 
@@ -50,7 +51,7 @@ func (r *RecordToma) AddRecord(context context.Context, request *alexa.Request, 
 				if err!=nil{
 					log.Println("entra por error")
 				}
-				err = createRecord(r.newRecord(email,"\""+getTimeNow()+"\"","\""+listNames[0].Nombre+"\"", ml), cfg.DynamoTableToma)
+				err = createRecord(r.newRecord(email,"\""+getTimestamp()+"\"", "\""+getTimeNow()+"\"","\""+listNames[0].Nombre+"\"", ml), cfg.DynamoTableToma)
 				if err!= nil {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
 					response.SetOutputText(cfg.SpeechErrorAddRecord)
@@ -90,22 +91,34 @@ func (r *RecordToma) GetRecord(context context.Context, request *alexa.Request, 
 	log.Println("getting the toma")
 
 	email := getEmail(aContext)
-
-	d, err := duration.FromString(request.Intent.Slots["tiempo"].Value)
-	if err != nil {
-		//TODO return erro
-		log.Println("error")
+ 	var oldTime, newTime string
+	if request.Intent.Slots["tiempo"].Value == ""{
+ 		oldTime = getTimeNow()
+ 		newTime = oldTime
+	}else {
+		d, err := duration.FromString(request.Intent.Slots["tiempo"].Value)
+		if err != nil {
+			log.Println("error formatting string")
+			response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoToma, cfg.ImageSmall, cfg.ImageLong)
+			response.SetOutputText(cfg.SpeechErrorNoToma)
+			response.ShouldSessionEnd = true
+			return
+		}
+		oldTime = formatNewTime(time.Now().Add(-d.ToDuration()))
+		newTime = getTimeNow()
 	}
-	oldTime := formatNewTime(time.Now().Add(-d.ToDuration()))
-	newTime := getTimeNow()
 	log.Println(oldTime, newTime)
 
 	listTomas, err := getRecordsToma("email", email,"\""+oldTime+"\"","\""+newTime+"\"")
+	if err != nil {
+		response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoToma, cfg.ImageSmall, cfg.ImageLong)
+		response.SetOutputText(cfg.SpeechErrorNoToma)
+		response.ShouldSessionEnd = true
+	}
 	var toma int
 	for _, val := range listTomas{
 		toma += val.Toma
 	}
-
 	response.SetStandardCard(cfg.CardTitle, cfg.SpeechTotalToma + strconv.Itoa(toma) + " mililitros", cfg.ImageSmall, cfg.ImageLong)
 	response.SetOutputText(cfg.SpeechTotalPeso + strconv.Itoa(toma) + " mililitros")
 	response.ShouldSessionEnd = true

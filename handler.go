@@ -66,6 +66,9 @@ func (h *MiBebe) OnIntent(context context.Context, request *alexa.Request, sessi
 	case cfg.GetRecordToma:
 		var f f.RecordToma
 		f.GetRecord(context, request, session, aContext, response)
+	case cfg.GetRecordTomaHoy:
+		var f f.RecordToma
+		f.GetRecord(context, request, session, aContext, response)
 	default:
 		return errors.New("Invalid Intent")
 	}
