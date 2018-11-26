@@ -118,10 +118,6 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 
 func formatNewTime(d time.Time) string{
 	p := strconv.Itoa
-	return p(d.Year()) + "-" + p(int(d.Month())) + "-" + p(d.Day()) + "T" + p(d.Hour()) + ":" + p(d.Minute()) + ":" + p(d.Second())
-}
-
-func ShortDateFromString(ds string) time.Time {
- 	date, _ := time.Parse(parser, ds)
- 	return date
+	return p(d.Year()) + "-" + p(int(d.Month())) + "-" + p(d.Day())
+	//+ "T" + p(d.Hour()) + ":" + p(d.Minute()) + ":" + p(d.Second())
 }
