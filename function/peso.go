@@ -99,9 +99,7 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 	tiempo := request.Intent.Slots["tiempo"].Value
 	email := getEmail(aContext)
 
-
-	log.Println(ultimo)
-	log.Println(tiempo)
+	
 
 	d, err := duration.FromString(request.Intent.Slots["tiempo"].Value)
 	if err != nil {

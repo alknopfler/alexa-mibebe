@@ -2,12 +2,12 @@ package function
 
 import (
 	"crypto/tls"
+	"fmt"
 	"github.com/ericdaugherty/alexa-skills-kit-golang"
 	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strconv"
 	"time"
 )
 
@@ -45,7 +45,11 @@ func getTimeNow() string {
 }
 
 func formatNewTime(d time.Time) string{
-	p := strconv.Itoa
+	/*p := strconv.Itoa
 	return p(d.Year()) + "-" + p(int(d.Month())) + "-" + p(d.Day())
 	//+ "T" + p(d.Hour()) + ":" + p(d.Minute()) + ":" + p(d.Second())
+	*/
+	layout := "2006-01-02"
+	return fmt.Sprintf(d.Format(layout))
+
 }
