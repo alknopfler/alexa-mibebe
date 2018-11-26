@@ -131,7 +131,7 @@ func getRecordsPeso(key, value, oldTime, newTime string) ([]RecordPeso, error){
 		log.Println("Got error building expression: "+err.Error())
 		return nil, err
 	}*/
-
+	log.Println(oldTime)
 	params := &dynamodb.ScanInput{
 		ExpressionAttributeNames: map[string]*string{
 			"#F": 	aws.String("fecha"),
