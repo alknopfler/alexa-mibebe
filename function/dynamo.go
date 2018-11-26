@@ -123,29 +123,19 @@ func getRecordsPeso(key, value, oldTime, newTime string) ([]RecordPeso, error){
 	}
 	svc := dynamodb.New(sess)
 
-	/*filt := expression.Name(key).Equal(expression.Value(value))
+	filt := expression.Name("fecha").Equal(expression.Value("\""+oldTime+"\""))
 
 	expr, err := expression.NewBuilder().WithFilter(filt).Build()
 
 	if err != nil {
 		log.Println("Got error building expression: "+err.Error())
 		return nil, err
-	}*/
-	log.Println(oldTime)
+	}
 	params := &dynamodb.ScanInput{
-		ExpressionAttributeNames: map[string]*string{
-			"#E": 	aws.String("\""+"alknopfler@gmail.com"+"\""),
-		},
-		ExpressionAttributeValues: map[string]*dynamodb.AttributeValue{
-			":fo" : {
-				S: 	aws.String("\""+oldTime+"\""),
-			},
-			":fn" : {
-				S: 	aws.String(newTime),
-			},
-
-		},
-		FilterExpression:          aws.String("fecha = :fo"),
+		ExpressionAttributeNames:  expr.Names(),
+		ExpressionAttributeValues: expr.Values(),
+		FilterExpression:          expr.Filter(),
+		ProjectionExpression:      expr.Projection(),
 		TableName:                 aws.String(cfg.DynamoTablePeso),
 	}
 
