@@ -139,7 +139,7 @@ func getRecordsPeso(key, value, oldTime, newTime string) ([]RecordPeso, error){
 		},
 		ExpressionAttributeValues: map[string]*dynamodb.AttributeValue{
 			":fo" : {
-				S: 	aws.String(oldTime),
+				S: 	aws.String("\""+oldTime+"\""),
 			},
 			":fn" : {
 				S: 	aws.String(newTime),
