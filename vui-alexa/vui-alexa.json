@@ -31,6 +31,8 @@
             }
           ],
           "samples": [
+            "guarda a {nombre}",
+            "me gustaría guardar a {nombre}",
             "me gustaría añadir a {nombre}",
             "me gustaría registrar a {nombre}",
             "registra a {nombre}",
@@ -58,7 +60,18 @@
             }
           ],
           "samples": [
-            "añade un nuevo peso de {kilos} con {gramos} "
+            "guarda un peso {kilos} {gramos} en",
+            "guarda un peso {kilos} {gramos} de",
+            "guarda un nuevo peso {kilos} {gramos} en",
+            "guarda un nuevo peso {kilos} {gramos} de",
+            "añade un nuevo peso {kilos} {gramos} de",
+            "añade un nuevo peso {kilos} {gramos} en",
+            "registra un nuevo peso {kilos} {gramos} de",
+            "registra un nuevo peso {kilos} {gramos} en",
+            "registra un peso {kilos} {gramos} en",
+            "añade un peso {kilos} {gramos} en",
+            "registra un peso {kilos} {gramos} de",
+            "añade un peso {kilos} {gramos} de"
           ]
         },
         {
@@ -73,6 +86,11 @@
             }
           ],
           "samples": [
+            "guardar una nueva toma de {mililitros}",
+            "guarda una toma de {mililitros}",
+            "añade una toma de {mililitros}",
+            "registra una toma de {mililitros}",
+            "registra una nueva toma de {mililitros}",
             "añade una nueva toma de {mililitros}"
           ]
         },
@@ -119,6 +137,16 @@
             "dime el total de tomas en {tiempo} de",
             "dime las tomas desde hace {tiempo} de",
             "dime las tomas acumuladas desde hace {tiempo} de"
+          ]
+        },
+        {
+          "name": "getTomaHoy",
+          "slots": [],
+          "samples": [
+            "dime lo que lleva tomado hoy ",
+            "dime el total de tomas de hoy de ",
+            "dime las tomas de hoy de ",
+            "dime lo que ha tomado hoy de "
           ]
         }
       ],
@@ -238,7 +266,7 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "¿De verdad quieres añadir {kilos} con {gramos} kilos como peso ?"
+            "value": "¿De verdad quieres añadir {kilos} kilos con {gramos} gramos como peso ?"
           }
         ]
       },
@@ -265,7 +293,7 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "¿De verdad quieres añadir la toma de {mililitros} de tu bebé?"
+            "value": "¿De verdad quieres añadir la toma de {mililitros} mililitros?"
           }
         ]
       },
