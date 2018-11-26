@@ -156,6 +156,7 @@ func getRecordsPeso(key, value, oldTime, newTime string) ([]RecordPeso, error){
 		log.Println("Failed to unmarshal Record: "+ err.Error())
 		return nil, err
 	}
+	log.Println("resultado: ")
 	log.Println(item)
 	return item, nil
 
