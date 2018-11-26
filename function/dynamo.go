@@ -123,7 +123,7 @@ func getRecordsPeso(key, value, oldTime, newTime string) ([]RecordPeso, error){
 	}
 	svc := dynamodb.New(sess)
 
-	filt := expression.Name("fecha").Equal(expression.Value(oldTime))
+	filt := expression.Name("fecha").Between(expression.Value(oldTime),expression.Value(newTime)).And(expression.Name("nombre").Equal(expression.Value(value)))
 
 	expr, err := expression.NewBuilder().WithFilter(filt).Build()
 
