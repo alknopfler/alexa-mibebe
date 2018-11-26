@@ -14,15 +14,16 @@ import (
 const parser = "2006-01-02T15:04:05"
 
 type RecordPeso struct {
-	Email  string    `json:"email"`
-	Fecha  string	 `json:"fecha"`
-	Nombre string    `json:"nombre"`
-	Peso   float64   `json:"peso"`
+	Email  		string   `json:"email"`
+	Timestamp	string 	 `json:"timestamp"`
+	Fecha  		string	 `json:"fecha"`
+	Nombre 		string   `json:"nombre"`
+	Peso   		float64  `json:"peso"`
 }
 
 
-func (r *RecordPeso) newRecord(email,fecha,nombre string, peso float64) RecordPeso{
-	return RecordPeso{email, fecha, nombre, peso}
+func (r *RecordPeso) newRecord(email, timestamp, fecha, nombre string, peso float64) RecordPeso{
+	return RecordPeso{email, timestamp, fecha, nombre, peso}
 }
 
 
@@ -57,7 +58,7 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 				if err!=nil{
 					log.Println("entra por error")
 				}
-				err = createRecord(r.newRecord(email, "\""+getTimeNow()+"\"","\""+listNames[0].Nombre+"\"", peso), cfg.DynamoTablePeso)
+				err = createRecord(r.newRecord(email, "\""+getTimestamp()+"\"", "\""+getTimeNow()+"\"","\""+listNames[0].Nombre+"\"", peso), cfg.DynamoTablePeso)
 				if err!= nil {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
 					response.SetOutputText(cfg.SpeechErrorAddRecord)

@@ -42,3 +42,7 @@ func formatNewTime(d time.Time) string{
 	return fmt.Sprintf(d.Format("2006-01-02"))
 
 }
+
+func getTimestamp() string {
+	return time.Now().Format("20060102150405")
+}
