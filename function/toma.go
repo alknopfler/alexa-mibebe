@@ -50,7 +50,7 @@ func (r *RecordToma) AddRecord(context context.Context, request *alexa.Request, 
 				if err!=nil{
 					log.Println("entra por error")
 				}
-				err = createRecord(r.newRecord(email, getTimeNow(),listNames[0].Nombre, ml), cfg.DynamoTableToma)
+				err = createRecord(r.newRecord(email,"\""+getTimeNow()+"\"","\""+listNames[0].Nombre+"\"", ml), cfg.DynamoTableToma)
 				if err!= nil {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
 					response.SetOutputText(cfg.SpeechErrorAddRecord)
