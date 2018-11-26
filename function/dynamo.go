@@ -150,6 +150,10 @@ func getRecordsPeso(key, value, oldTime, newTime string) ([]RecordPeso, error){
 	}
 
 	result, err := svc.Scan(params)
+	if err!= nil{
+		log.Println("error scanning")
+	}
+	log.Println(result)
 	var item []RecordPeso
 	err = dynamodbattribute.UnmarshalListOfMaps(result.Items, &item)
 	if err != nil {
