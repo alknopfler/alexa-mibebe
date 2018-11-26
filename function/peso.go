@@ -1,6 +1,7 @@
 package function
 
 import (
+	"fmt"
 	cfg "github.com/alknopfler/alexa-mibebe/config"
 	"log"
 	"context"
@@ -118,8 +119,8 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 		peso += val.Peso
 	}
 
-	response.SetStandardCard(cfg.CardTitle, cfg.SpeechTotalPeso, cfg.ImageSmall, cfg.ImageLong)
-	response.SetOutputText(cfg.SpeechTotalPeso)
+	response.SetStandardCard(cfg.CardTitle, cfg.SpeechTotalPeso + fmt.Sprintf("%f", peso), cfg.ImageSmall, cfg.ImageLong)
+	response.SetOutputText(cfg.SpeechTotalPeso + fmt.Sprintf("%f", peso))
 	response.ShouldSessionEnd = true
 	return
 
