@@ -36,20 +36,9 @@ func doRequestOauth(method, apiURL, tokenBearer string, body io.Reader ) *http.R
 
 func getTimeNow() string {
 	return time.Now().Format("2006-01-02")
-
-	/*// ISO8601 JSON format
-	// "2014-03-25T16:15:25"
-	data, _ := json.Marshal(iso8601.Time(t))
-	return string(data)
-*/
 }
 
 func formatNewTime(d time.Time) string{
-	/*p := strconv.Itoa
-	return p(d.Year()) + "-" + p(int(d.Month())) + "-" + p(d.Day())
-	//+ "T" + p(d.Hour()) + ":" + p(d.Minute()) + ":" + p(d.Second())
-	*/
-	layout := "2006-01-02"
-	return fmt.Sprintf(d.Format(layout))
+	return fmt.Sprintf(d.Format("2006-01-02"))
 
 }
