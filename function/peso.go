@@ -114,7 +114,7 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 		peso += val.Peso
 	}
 
-	log.Println(peso)
+	log.Println(fmt.Sprintf("%f", peso))
 	kilos, gramos := splitFloat(fmt.Sprintf("%f", peso))
 	log.Println(kilos,gramos)
 	response.SetStandardCard(cfg.CardTitle, cfg.SpeechTotalPeso + kilos + " kilogramos" + " con "+ gramos + " gramos", cfg.ImageSmall, cfg.ImageLong)
