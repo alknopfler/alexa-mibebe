@@ -120,7 +120,7 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 	}
 
 	response.SetStandardCard(cfg.CardTitle, cfg.SpeechTotalPeso + fmt.Sprintf("%f", peso), cfg.ImageSmall, cfg.ImageLong)
-	response.SetOutputText(cfg.SpeechTotalPeso + fmt.Sprintf("%f", peso))
+	response.SetOutputText(cfg.SpeechTotalPeso + fmt.Sprintf("%.3f", peso))
 	response.ShouldSessionEnd = true
 	return
 
