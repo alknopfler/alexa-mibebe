@@ -43,3 +43,8 @@ func getTimeNow() string {
 */
 }
 
+func formatNewTime(d time.Time) string{
+	p := strconv.Itoa
+	return p(d.Year()) + "-" + p(int(d.Month())) + "-" + p(d.Day())
+	//+ "T" + p(d.Hour()) + ":" + p(d.Minute()) + ":" + p(d.Second())
+}

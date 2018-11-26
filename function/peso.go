@@ -56,7 +56,7 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 				if err!=nil{
 					log.Println("entra por error")
 				}
-				err = createRecord(r.newRecord(email, getTimeNow(),listNames[0].Nombre, peso), cfg.DynamoTablePeso)
+				err = createRecord(r.newRecord(email, "\""+getTimeNow()+"\"","\""+listNames[0].Nombre+"\"", peso), cfg.DynamoTablePeso)
 				if err!= nil {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
 					response.SetOutputText(cfg.SpeechErrorAddRecord)
@@ -113,11 +113,17 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 
 	//result, err := getRecordsBetweenDate("fecha", "\""+formatNewTime(oldTime)+"\"", getTimeNow(),cfg.DynamoTablePeso)
 	listPesos, err := getRecordsPeso("email", email,"\""+oldTime+"\"","\""+newTime+"\"")
-	log.Println(listPesos)
+	var peso float64
+	for _, val := range listPesos{
+		peso += val.Peso
+	}
+
+	response.SetStandardCard(cfg.CardTitle, cfg.SpeechTotalPeso, cfg.ImageSmall, cfg.ImageLong)
+	response.SetOutputText(cfg.SpeechTotalPeso)
+	response.ShouldSessionEnd = true
+	return
+
+
 }
 
-func formatNewTime(d time.Time) string{
-	p := strconv.Itoa
-	return p(d.Year()) + "-" + p(int(d.Month())) + "-" + p(d.Day())
-	//+ "T" + p(d.Hour()) + ":" + p(d.Minute()) + ":" + p(d.Second())
-}
+
