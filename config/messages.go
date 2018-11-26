@@ -14,4 +14,5 @@ const (
 	SpeechErrorNoRegistered = "Vale."
 	SpeechNameis			= "El nombre del bebé registrado es: "
 	SpeechTotalPeso 		= "El peso total acumulado es "
+	SpeechTotalToma 		= "El volumen total de las tomas es "
 	)

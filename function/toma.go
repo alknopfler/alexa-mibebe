@@ -2,10 +2,12 @@ package function
 
 import (
 	"context"
-	"github.com/ericdaugherty/alexa-skills-kit-golang"
 	cfg "github.com/alknopfler/alexa-mibebe/config"
+	"github.com/alknopfler/iso8601duration"
+	"github.com/ericdaugherty/alexa-skills-kit-golang"
 	"log"
 	"strconv"
+	"time"
 )
 
 type RecordToma struct {
@@ -83,4 +85,31 @@ func (r *RecordToma) AddRecord(context context.Context, request *alexa.Request, 
 	}
 }
 
-func (r *RecordToma) GetRecord(context context.Context, request *alexa.Request, session *alexa.Session, aContext *alexa.Context, response *alexa.Response){}
+
+func (r *RecordToma) GetRecord(context context.Context, request *alexa.Request, session *alexa.Session, aContext *alexa.Context, response *alexa.Response){
+	log.Println("getting the toma")
+
+	email := getEmail(aContext)
+
+	d, err := duration.FromString(request.Intent.Slots["tiempo"].Value)
+	if err != nil {
+		//TODO return erro
+		log.Println("error")
+	}
+	oldTime := formatNewTime(time.Now().Add(-d.ToDuration()))
+	newTime := getTimeNow()
+	log.Println(oldTime, newTime)
+
+	listTomas, err := getRecordsToma("email", email,"\""+oldTime+"\"","\""+newTime+"\"")
+	var toma int
+	for _, val := range listTomas{
+		toma += val.Toma
+	}
+
+	response.SetStandardCard(cfg.CardTitle, cfg.SpeechTotalToma + strconv.Itoa(toma) + " mililitros", cfg.ImageSmall, cfg.ImageLong)
+	response.SetOutputText(cfg.SpeechTotalPeso + strconv.Itoa(toma) + " mililitros")
+	response.ShouldSessionEnd = true
+	return
+
+}
+
