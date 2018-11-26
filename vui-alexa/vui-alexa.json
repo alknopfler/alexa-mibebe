@@ -102,6 +102,24 @@
             "dime el peso desde {tiempo} de ",
             "dime el peso en {tiempo} de"
           ]
+        },
+        {
+          "name": "getToma",
+          "slots": [
+            {
+              "name": "tiempo",
+              "type": "AMAZON.DURATION"
+            }
+          ],
+          "samples": [
+            "dime las tomas en {tiempo} de",
+            "dime las tomas desde {tiempo} de",
+            "dime las tomas acumuladas desde {tiempo} de",
+            "dime las tomas acumuladas en {tiempo} de",
+            "dime el total de tomas en {tiempo} de",
+            "dime las tomas desde hace {tiempo} de",
+            "dime las tomas acumuladas desde hace {tiempo} de"
+          ]
         }
       ],
       "types": [
