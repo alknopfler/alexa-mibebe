@@ -114,7 +114,7 @@ func getRecordsName(key, value string) ([]RecordName, error){
 }
 
 
-func getRecordsPeso(key, value string) ([]RecordPeso, error){
+func getRecordsPeso(key, value, oldTime, newTime string) ([]RecordPeso, error){
 
 	sess, err := session.NewSession(&aws.Config{Region: &cfg.AWS_Region})
 	if err != nil{
@@ -123,19 +123,29 @@ func getRecordsPeso(key, value string) ([]RecordPeso, error){
 	}
 	svc := dynamodb.New(sess)
 
-	filt := expression.Name(key).Equal(expression.Value(value))
+	/*filt := expression.Name(key).Equal(expression.Value(value))
 
 	expr, err := expression.NewBuilder().WithFilter(filt).Build()
 
 	if err != nil {
 		log.Println("Got error building expression: "+err.Error())
 		return nil, err
-	}
+	}*/
 
 	params := &dynamodb.ScanInput{
-		ExpressionAttributeNames:  expr.Names(),
-		ExpressionAttributeValues: expr.Values(),
-		FilterExpression:          expr.Filter(),
+		ExpressionAttributeNames: map[string]*string{
+			"#F": 	aws.String("fecha"),
+		},
+		ExpressionAttributeValues: map[string]*dynamodb.AttributeValue{
+			":fo" : {
+				S: 	aws.String(oldTime),
+			},
+			":fn" : {
+				S: 	aws.String(newTime),
+			},
+
+		},
+		FilterExpression:          aws.String("fecha > :fo && fecha < :fn"),
 		TableName:                 aws.String(cfg.DynamoTablePeso),
 	}
 

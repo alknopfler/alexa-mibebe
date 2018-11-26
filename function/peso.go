@@ -108,31 +108,12 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 		log.Println("error")
 	}
 	oldTime := formatNewTime(time.Now().Add(-d.ToDuration()))
-	tOldTime := strconv.FormatInt(time.Now().Add(-d.ToDuration()).UTC().UnixNano(),10)
 	newTime := getTimeNow()
-	tNewTime := strconv.FormatInt(time.Now().UTC().UnixNano(),10)
 	log.Println(oldTime, newTime)
 
 	//result, err := getRecordsBetweenDate("fecha", "\""+formatNewTime(oldTime)+"\"", getTimeNow(),cfg.DynamoTablePeso)
-	listPesos, err := getRecordsPeso("email", email)
-	if err != nil{
-		log.Println("ERror getintg records")
-	}
-	var peso float64 = 0
-	for _,val := range listPesos{
-		tVal := strconv.FormatInt(ShortDateFromString(val.Fecha).UTC().UnixNano(),10)
-		log.Println(tVal)
-		a, _ := strconv.Atoi(tVal)
-		b, _ := strconv.Atoi(tOldTime)
-		c, _ := strconv.Atoi(tVal)
-		d, _ := strconv.Atoi(tNewTime)
-		if a > b && c <= d {
-			peso += val.Peso
-		}else{
-			log.Println("entra por else")
-		}
-	}
-	log.Println(peso)
+	listPesos, err := getRecordsPeso("email", email,oldTime,newTime)
+	log.Println(listPesos)
 }
 
 func formatNewTime(d time.Time) string{
