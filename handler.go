@@ -39,6 +39,7 @@ func (h *MiBebe) OnLaunch(context context.Context, request *alexa.Request, sessi
 	response.SetStandardCard(cfg.CardTitle, cfg.SpeechOnLaunch, cfg.ImageSmall, cfg.ImageLong)
 	response.SetOutputText(cfg.SpeechOnLaunch)
 	response.SetRepromptSSML(cfg.SpeechOnLaunch)
+	response.ShouldSessionEnd = false
 
 	return nil
 }
