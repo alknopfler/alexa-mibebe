@@ -19,7 +19,8 @@ const(
 	Cancel					= "AMAZON.CancelIntent"
 	Stop					= "AMAZON.StopIntent"
 	Navigate				= "AMAZON.NavigateHomeIntent"
-)
+	Help					= "AMAZON:HelpIntent"
+	)
 
 var(
 	AWS_Key 				= os.Getenv("AWS_ACCESS_KEY_ID")
