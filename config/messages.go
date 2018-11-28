@@ -12,6 +12,7 @@ const (
 	SpeechOnAddPeso			= "Muy bien, he registrado el nuevo peso de tu bebé."
 	SpeechOnAddToma			= "Muy bien, he registrado la nueva toma de tu bebé."
 	SpeechErrorNoRegistered = "Vale."
+	SpeechNavigate			= "Lo siento, pero esta funcionalidad no está implementada en Mi Bebé"
 	SpeechNameis			= "El nombre del bebé registrado es: "
 	SpeechTotalPeso 		= "El peso total acumulado es "
 	SpeechTotalToma 		= "El volumen total de las tomas es "
