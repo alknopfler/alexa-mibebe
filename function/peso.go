@@ -49,7 +49,6 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 			if err!= nil {
 				response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorExist, cfg.ImageSmall, cfg.ImageLong)
 				response.SetOutputText(cfg.SpeechErrorExist)
-				response.ShouldSessionEnd = true
 				return
 			}
 			if pEnt != "" && exists{
@@ -62,31 +61,26 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 				if err!= nil {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
 					response.SetOutputText(cfg.SpeechErrorAddRecord)
-					response.ShouldSessionEnd = true
 					return
 				}
 				response.SetStandardCard(cfg.CardTitle, cfg.SpeechOnAddPeso, cfg.ImageSmall, cfg.ImageLong)
 				response.SetOutputText(cfg.SpeechOnAddPeso)
-				response.ShouldSessionEnd = true
 				return
 
 			}else{
 				if pEnt == "" {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoPeso, cfg.ImageSmall, cfg.ImageLong)
 					response.SetOutputText(cfg.SpeechErrorNoPeso)
-					response.ShouldSessionEnd = true
 					return
 				}
 				response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNotExist, cfg.ImageSmall, cfg.ImageLong)
 				response.SetOutputText(cfg.SpeechErrorNotExist)
-				response.ShouldSessionEnd = true
 				return
 
 			}
 		}else{
 			response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoRegistered, cfg.ImageSmall, cfg.ImageLong)
 			response.SetOutputText(cfg.SpeechErrorNoRegistered)
-			response.ShouldSessionEnd = true
 			return
 		}
 
@@ -103,7 +97,6 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 		log.Println("error formating date")
 		response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoPeso, cfg.ImageSmall, cfg.ImageLong)
 		response.SetOutputText(cfg.SpeechErrorNoPeso)
-		response.ShouldSessionEnd = true
 		return
 	}
 	oldTime := formatNewTime(time.Now().Add(-d.ToDuration()))
@@ -114,7 +107,6 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 	if err != nil{
 		response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoPeso, cfg.ImageSmall, cfg.ImageLong)
 		response.SetOutputText(cfg.SpeechErrorNoPeso)
-		response.ShouldSessionEnd = true
 		return
 	}
 	var peso float64
@@ -125,7 +117,6 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 	kilos, gramos := splitFloat(fmt.Sprintf("%.3f", peso))
 	response.SetStandardCard(cfg.CardTitle, cfg.SpeechTotalPeso + kilos + " kilogramos" + " con "+ gramos + " gramos", cfg.ImageSmall, cfg.ImageLong)
 	response.SetOutputText(cfg.SpeechTotalPeso + kilos + " kilogramos" + " con "+ gramos + " gramos")
-	response.ShouldSessionEnd = true
 	return
 }
 

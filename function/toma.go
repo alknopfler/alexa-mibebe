@@ -42,7 +42,6 @@ func (r *RecordToma) AddRecord(context context.Context, request *alexa.Request, 
 			if err!= nil {
 				response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorExist, cfg.ImageSmall, cfg.ImageLong)
 				response.SetOutputText(cfg.SpeechErrorExist)
-				response.ShouldSessionEnd = true
 				return
 			}
 			if ml != 0 && exists{
@@ -55,31 +54,26 @@ func (r *RecordToma) AddRecord(context context.Context, request *alexa.Request, 
 				if err!= nil {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
 					response.SetOutputText(cfg.SpeechErrorAddRecord)
-					response.ShouldSessionEnd = true
 					return
 				}
 				response.SetStandardCard(cfg.CardTitle, cfg.SpeechOnAddToma, cfg.ImageSmall, cfg.ImageLong)
 				response.SetOutputText(cfg.SpeechOnAddToma)
-				response.ShouldSessionEnd = true
 				return
 
 			}else{
 				if ml == 0 {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoPeso, cfg.ImageSmall, cfg.ImageLong)
 					response.SetOutputText(cfg.SpeechErrorNoToma)
-					response.ShouldSessionEnd = true
 					return
 				}
 				response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNotExist, cfg.ImageSmall, cfg.ImageLong)
 				response.SetOutputText(cfg.SpeechErrorNotExist)
-				response.ShouldSessionEnd = true
 				return
 
 			}
 		}else{
 			response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoRegistered, cfg.ImageSmall, cfg.ImageLong)
 			response.SetOutputText(cfg.SpeechErrorNoRegistered)
-			response.ShouldSessionEnd = true
 			return
 		}
 
@@ -101,7 +95,6 @@ func (r *RecordToma) GetRecord(context context.Context, request *alexa.Request, 
 			log.Println("error formatting string")
 			response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoToma, cfg.ImageSmall, cfg.ImageLong)
 			response.SetOutputText(cfg.SpeechErrorNoToma)
-			response.ShouldSessionEnd = true
 			return
 		}
 		oldTime = formatNewTime(time.Now().Add(-d.ToDuration()))
@@ -113,7 +106,6 @@ func (r *RecordToma) GetRecord(context context.Context, request *alexa.Request, 
 	if err != nil {
 		response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoToma, cfg.ImageSmall, cfg.ImageLong)
 		response.SetOutputText(cfg.SpeechErrorNoToma)
-		response.ShouldSessionEnd = true
 	}
 	var toma int
 	for _, val := range listTomas{
@@ -121,7 +113,6 @@ func (r *RecordToma) GetRecord(context context.Context, request *alexa.Request, 
 	}
 	response.SetStandardCard(cfg.CardTitle, cfg.SpeechTotalToma + strconv.Itoa(toma) + " mililitros", cfg.ImageSmall, cfg.ImageLong)
 	response.SetOutputText(cfg.SpeechTotalToma + strconv.Itoa(toma) + " mililitros")
-	response.ShouldSessionEnd = true
 	return
 
 }

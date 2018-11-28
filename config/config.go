@@ -16,6 +16,7 @@ const(
 	GetRecordPeso			= "getPeso"
 	GetRecordToma			= "getToma"
 	GetRecordTomaHoy		= "getTomaHoy"
+	Cancel					= "AMAZON.CancelIntent"
 )
 
 var(

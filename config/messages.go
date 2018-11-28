@@ -1,7 +1,7 @@
 package config
 
 const (
-	SpeechOnLaunch 			= "Bienvenido a la skill Mi Bebé. Conmigo podrás llevar el registro de crecimiento de tu bebé en sus primeros meses de vida."
+	SpeechOnLaunch 			= "Bienvenido a la skill Mi Bebé. Conmigo podrás llevar el registro de crecimiento de tu bebé en sus primeros meses de vida. ¿Qué quieres hacer ahora?"
 	SpeechErrorAddRecord	= "Lo siento, no he podido añadir el registro que me has pedido. Inténtalo de nuevo."
 	SpeechErrorExist		= "Lo siento, ya tienes un bebé registrado. Por el momento sólo puedo gestionar un bebé por cuenta."
 	SpeechErrorNotExist		= "Lo siento, no existe un bebé registrado con tu cuenta. Pídeme registrarlo y así podemos empezar a guardar datos."
