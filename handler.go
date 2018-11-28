@@ -71,7 +71,7 @@ func (h *MiBebe) OnIntent(context context.Context, request *alexa.Request, sessi
 	default:
 		return errors.New("Invalid Intent")
 	}
-
+	response.ShouldSessionEnd = false
 	return nil
 }
 
