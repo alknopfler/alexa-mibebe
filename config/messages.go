@@ -15,6 +15,6 @@ const (
 	SpeechNavigate			= "Lo siento, pero esta funcionalidad no está implementada en Mi Bebé...¿cómo te puedo ayudar?"
 	SpeechNameis			= "El nombre del bebé registrado es: "
 	SpeechTotalPeso 		= "El peso total acumulado es "
-	SpeechTotalToma 		= "El volumen total de las tomas es "
+	SpeechTotalToma 		= "El volumen total es "
 	SpeechHelp				= "Puedes añadir y consultar un peso, o una toma de tu bebé o bien cerrar la skill...¿cómo te puedo ayudar?"
 	)
