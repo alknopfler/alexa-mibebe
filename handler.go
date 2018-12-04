@@ -40,6 +40,7 @@ func (h *MiBebe) OnLaunch(context context.Context, request *alexa.Request, sessi
 	response.ShouldSessionEnd = false
 	response.SetRepromptText(cfg.SpeechNavigate)
 
+
 	return nil
 }
 
