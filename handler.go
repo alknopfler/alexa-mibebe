@@ -35,7 +35,7 @@ func (h *MiBebe) OnLaunch(context context.Context, request *alexa.Request, sessi
 	log.Printf("OnLaunch requestId=%s, sessionId=%s", request.RequestID, session.SessionID)
 	response.SetStandardCard(cfg.CardTitle, cfg.SpeechOnLaunch, cfg.ImageSmall, cfg.ImageLong)
 	response.SetOutputText(cfg.SpeechOnLaunch)
-	//response.ShouldSessionEnd = false
+	response.ShouldSessionEnd = false
 	return nil
 }
 
