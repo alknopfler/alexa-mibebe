@@ -98,6 +98,8 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 		log.Println("error formating date")
 		response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoPeso, cfg.ImageSmall, cfg.ImageLong)
 		response.SetOutputText(cfg.SpeechErrorNoPeso)
+		response.ShouldSessionEnd = true
+
 		return
 	}
 	oldTime := formatNewTime(time.Now().Add(-d.ToDuration()))
@@ -108,6 +110,8 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 	if err != nil{
 		response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoPeso, cfg.ImageSmall, cfg.ImageLong)
 		response.SetOutputText(cfg.SpeechErrorNoPeso)
+		response.ShouldSessionEnd = true
+
 		return
 	}
 	var peso float64
@@ -118,6 +122,8 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 	kilos, gramos := splitFloat(fmt.Sprintf("%.3f", peso))
 	response.SetStandardCard(cfg.CardTitle, cfg.SpeechTotalPeso + kilos + " kilogramos" + " con "+ gramos + " gramos", cfg.ImageSmall, cfg.ImageLong)
 	response.SetOutputText(cfg.SpeechTotalPeso + kilos + " kilogramos" + " con "+ gramos + " gramos")
+	response.ShouldSessionEnd = true
+
 	return
 }
 

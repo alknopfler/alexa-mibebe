@@ -88,10 +88,14 @@ func (r *RecordName) GetRecord(context context.Context, request *alexa.Request, 
 	if len(listNames)==1 {
 		response.SetStandardCard(cfg.CardTitle, cfg.SpeechNameis, cfg.ImageSmall, cfg.ImageLong)
 		response.SetOutputText(cfg.SpeechNameis + " " + listNames[0].Nombre)
+		response.ShouldSessionEnd = true
+
 		return
 	}else{
 		response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNotExist, cfg.ImageSmall, cfg.ImageLong)
 		response.SetOutputText(cfg.SpeechErrorNotExist)
+		response.ShouldSessionEnd = true
+
 		return
 	}
 }
