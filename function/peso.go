@@ -57,7 +57,7 @@ func (r *RecordPeso) AddRecord(context context.Context, request *alexa.Request, 
 				if err!=nil{
 					log.Println("entra por error")
 				}
-				err = createRecord(r.newRecord(email, "\""+getTimestamp()+"\"", "\""+getTimeNow()+"\"","\""+listNames[0].Nombre+"\"", peso), cfg.DynamoTablePeso)
+				err = createRecord(r.newRecord(email, "\""+getTimestamp()+"\"", "\""+getTimeNow()+"\"",listNames[0].Nombre, peso), cfg.DynamoTablePeso)
 				if err!= nil {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
 					response.SetOutputText(cfg.SpeechErrorAddRecord)
