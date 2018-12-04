@@ -35,6 +35,7 @@ func (r *RecordName) AddRecord(context context.Context, request *alexa.Request, 
 			if err!= nil {
 				response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorExist, cfg.ImageSmall, cfg.ImageLong)
 				response.SetOutputText(cfg.SpeechErrorExist)
+				response.ShouldSessionEnd = true
 				return
 			}
 			if nombre != "" && !exists{
@@ -43,27 +44,34 @@ func (r *RecordName) AddRecord(context context.Context, request *alexa.Request, 
 				if err!= nil {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
 					response.SetOutputText(cfg.SpeechErrorAddRecord)
+					response.ShouldSessionEnd = true
 					return
 				}
 
 				response.SetStandardCard(cfg.CardTitle, cfg.SpeechOnAddRecord, cfg.ImageSmall, cfg.ImageLong)
 				response.SetOutputText(cfg.SpeechOnAddRecord)
+				response.ShouldSessionEnd = true
 				return
 
 			}else{
 				if nombre == "" {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoName, cfg.ImageSmall, cfg.ImageLong)
 					response.SetOutputText(cfg.SpeechErrorNoName)
+					response.ShouldSessionEnd = true
 					return
 				}
 				response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorExist, cfg.ImageSmall, cfg.ImageLong)
 				response.SetOutputText(cfg.SpeechErrorExist)
+				response.ShouldSessionEnd = true
+
 				return
 
 			}
 		}else{
 			response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoRegistered, cfg.ImageSmall, cfg.ImageLong)
 			response.SetOutputText(cfg.SpeechErrorNoRegistered)
+			response.ShouldSessionEnd = true
+
 			return
 		}
 
