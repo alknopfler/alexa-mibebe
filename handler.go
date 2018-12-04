@@ -33,8 +33,8 @@ func (h *MiBebe) OnSessionStarted(context context.Context, request *alexa.Reques
 // OnLaunch called with a reqeust is received of type LaunchRequest
 func (h *MiBebe) OnLaunch(context context.Context, request *alexa.Request, session *alexa.Session, aContext *alexa.Context, response *alexa.Response) error {
 	log.Printf("OnLaunch requestId=%s, sessionId=%s", request.RequestID, session.SessionID)
-	response.SetStandardCard(cfg.CardTitle, cfg.SpeechOnLaunch, cfg.ImageSmall, cfg.ImageLong)
-	response.SetOutputText(cfg.SpeechOnLaunch)
+	//response.SetStandardCard(cfg.CardTitle, cfg.SpeechOnLaunch, cfg.ImageSmall, cfg.ImageLong)
+	//response.SetOutputText(cfg.SpeechOnLaunch)
 	log.Println("el tipo es: "+request.Type)
 	response.Reprompt.OutputSpeech.Text = cfg.SpeechOnLaunch
 	//response.ShouldSessionEnd = false
