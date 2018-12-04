@@ -19,7 +19,7 @@ const(
 	Cancel					= "AMAZON.CancelIntent"
 	Stop					= "AMAZON.StopIntent"
 	Navigate				= "AMAZON.NavigateHomeIntent"
-	Help					= "AMAZON:HelpIntent"
+	Help					= "AMAZON.HelpIntent"
 	)
 
 var(
