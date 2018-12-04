@@ -14,7 +14,6 @@ import (
 
 var a = &alexa.Alexa{ApplicationID: cfg.AppID, RequestHandler: &MiBebe{}, IgnoreTimestamp: true}
 
-
 // Mibebe struct for request from the mibebe skill.
 type MiBebe struct{}
 
