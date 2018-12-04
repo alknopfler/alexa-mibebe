@@ -85,7 +85,7 @@ func (h *MiBebe) OnIntent(context context.Context, request *alexa.Request, sessi
 		f.Help(context, request, session, aContext, response)
 
 	default:
-		log.Println("Entra por default")
+		log.Println("Entra por default Intent")
 		f.Navigate(context, request, session, aContext, response)
 	}
 	log.Println("antes del nil onlaunch")
