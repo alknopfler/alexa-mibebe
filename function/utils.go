@@ -3,7 +3,7 @@ package function
 import (
 	"crypto/tls"
 	"fmt"
-	"github.com/ericdaugherty/alexa-skills-kit-golang"
+	"github.com/alknopfler/alexa-skills-kit-golang"
 	"io"
 	"io/ioutil"
 	"log"

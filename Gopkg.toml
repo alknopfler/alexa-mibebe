@@ -31,7 +31,7 @@
 
 [[constraint]]
   branch = "master"
-  name = "github.com/ericdaugherty/alexa-skills-kit-golang"
+  name = "github.com/alknopfler/alexa-skills-kit-golang"
 
 [[constraint]]
   branch = "master"

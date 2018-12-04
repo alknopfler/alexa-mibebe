@@ -5,7 +5,7 @@ import (
 	"log"
 
 	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/ericdaugherty/alexa-skills-kit-golang"
+	"github.com/alknopfler/alexa-skills-kit-golang"
 
 	cfg "github.com/alknopfler/alexa-mibebe/config"
 	f "github.com/alknopfler/alexa-mibebe/function"

@@ -5,7 +5,7 @@ import (
 	cfg "github.com/alknopfler/alexa-mibebe/config"
 	"log"
 	"context"
-	"github.com/ericdaugherty/alexa-skills-kit-golang"
+	"github.com/alknopfler/alexa-skills-kit-golang"
 	"strconv"
 	"github.com/alknopfler/iso8601duration"
 	"time"

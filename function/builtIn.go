@@ -2,7 +2,7 @@ package function
 
 import (
 	"context"
-	"github.com/ericdaugherty/alexa-skills-kit-golang"
+	"github.com/alknopfler/alexa-skills-kit-golang"
 	cfg "github.com/alknopfler/alexa-mibebe/config"
 )
 
