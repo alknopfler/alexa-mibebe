@@ -36,8 +36,8 @@ func (h *MiBebe) OnLaunch(context context.Context, request *alexa.Request, sessi
 	response.SetStandardCard(cfg.CardTitle, cfg.SpeechOnLaunch, cfg.ImageSmall, cfg.ImageLong)
 	response.SetOutputText(cfg.SpeechOnLaunch)
 	log.Println("el tipo es: "+request.Type)
-
-	response.ShouldSessionEnd = false
+	response.Reprompt.OutputSpeech.Text = cfg.SpeechOnLaunch
+	//response.ShouldSessionEnd = false
 	return nil
 }
 
