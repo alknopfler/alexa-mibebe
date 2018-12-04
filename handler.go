@@ -94,6 +94,8 @@ func (h *MiBebe) OnIntent(context context.Context, request *alexa.Request, sessi
 // OnSessionEnded called with a reqeust is received of type SessionEndedRequest
 func (h *MiBebe) OnSessionEnded(context context.Context, request *alexa.Request, session *alexa.Session, aContext *alexa.Context, response *alexa.Response) error {
 	log.Printf("OnSessionEnded requestId=%s, sessionId=%s", request.RequestID, session.SessionID)
+	response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoRegistered, cfg.ImageSmall, cfg.ImageLong)
+	response.SetOutputText(cfg.SpeechErrorNoRegistered)
 	response.ShouldSessionEnd = true
 	return nil
 }
