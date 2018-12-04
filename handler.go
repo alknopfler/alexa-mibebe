@@ -2,14 +2,13 @@ package main
 
 import (
 	"context"
-	"errors"
 	"log"
 
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/ericdaugherty/alexa-skills-kit-golang"
 
-	f "github.com/alknopfler/alexa-mibebe/function"
 	cfg "github.com/alknopfler/alexa-mibebe/config"
+	f "github.com/alknopfler/alexa-mibebe/function"
 )
 
 
@@ -87,7 +86,7 @@ func (h *MiBebe) OnIntent(context context.Context, request *alexa.Request, sessi
 		f.Help(context, request, session, aContext, response)
 
 	default:
-		return errors.New("Invalid Intent")
+		f.Navigate(context, request, session, aContext, response)
 	}
 	return nil
 }
