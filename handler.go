@@ -39,6 +39,7 @@ func (h *MiBebe) OnLaunch(context context.Context, request *alexa.Request, sessi
 	log.Println("el tipo es: "+request.Type)
 	response.ShouldSessionEnd = false
 	response.SetRepromptText(cfg.SpeechNavigate)
+	response.ShouldSessionEnd = true
 
 
 	return nil
