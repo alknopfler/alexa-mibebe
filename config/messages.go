@@ -16,5 +16,5 @@ const (
 	SpeechNameis			= "El nombre del bebé registrado es: "
 	SpeechTotalPeso 		= "El peso total acumulado es "
 	SpeechTotalToma 		= "El volumen total es "
-	SpeechHelp				= "Puedes añadir y consultar un peso, o una toma de tu bebé o bien cerrar la skill...¿cómo te puedo ayudar?"
+	SpeechHelp				= "Puedes registrar un nombre de tu bebé, añadir y consultar un peso, o bien añadir y consultar una toma de tu bebé...¿cómo te puedo ayudar?"
 	)
