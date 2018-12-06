@@ -19,7 +19,8 @@ func (r *RecordName) newRecord(email,nombre string) RecordName{
 
 func (r *RecordName) AddRecord(context context.Context, request *alexa.Request, session *alexa.Session, aContext *alexa.Context, response *alexa.Response) {
 	log.Println("register new baby")
-
+	p := RecordPeso{}
+	t := RecordToma{}
 	nombre := request.Intent.Slots["nombre"].Value
 
 	if request.DialogState != "COMPLETED" {
@@ -41,8 +42,8 @@ func (r *RecordName) AddRecord(context context.Context, request *alexa.Request, 
 			if nombre != "" && !exists{
 
 				err := createRecord(r.newRecord(getUserId(aContext), "\""+nombre+"\""),cfg.DynamoTableName)
-				err1 := createRecord(RecordPeso{}.newRecord(getUserId(aContext), "\""+getTimestamp()+"\"", "\""+getTimeNow()+"\"",nombre, 0), cfg.DynamoTablePeso)
-				err2 := createRecord(RecordToma{}.newRecord(getUserId(aContext),"\""+getTimestamp()+"\"", "\""+getTimeNow()+"\"",nombre, 0), cfg.DynamoTableToma)
+				err1 := createRecord(p.newRecord(getUserId(aContext), "\""+getTimestamp()+"\"", "\""+getTimeNow()+"\"",nombre, 0), cfg.DynamoTablePeso)
+				err2 := createRecord(t.newRecord(getUserId(aContext),"\""+getTimestamp()+"\"", "\""+getTimeNow()+"\"",nombre, 0), cfg.DynamoTableToma)
 
 				if err != nil || err1 != nil || err2 != nil {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
