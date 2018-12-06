@@ -42,8 +42,8 @@ func (r *RecordName) AddRecord(context context.Context, request *alexa.Request, 
 			if nombre != "" && !exists{
 
 				err := createRecord(r.newRecord(getUserId(aContext), "\""+nombre+"\""),cfg.DynamoTableName)
-				err1 := createRecord(p.newRecord(getUserId(aContext), "\""+getTimestamp()+"\"", "\""+getTimeNow()+"\"",nombre, 0), cfg.DynamoTablePeso)
-				err2 := createRecord(t.newRecord(getUserId(aContext),"\""+getTimestamp()+"\"", "\""+getTimeNow()+"\"",nombre, 0), cfg.DynamoTableToma)
+				err1 := createRecord(p.newRecord(getUserId(aContext), "\""+getTimestamp()+"\"", "\""+getTimeNow()+"\"", "\""+nombre+"\"", 0), cfg.DynamoTablePeso)
+				err2 := createRecord(t.newRecord(getUserId(aContext),"\""+getTimestamp()+"\"", "\""+getTimeNow()+"\"", "\""+nombre+"\"", 0), cfg.DynamoTableToma)
 
 				if err != nil || err1 != nil || err2 != nil {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
