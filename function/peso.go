@@ -107,7 +107,7 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 	log.Println(oldTime, newTime)
 
 	listPesos, err := getRecordsPeso("email", email,"\""+oldTime+"\"","\""+newTime+"\"")
-	if err != nil{
+	if err != nil || listPesos == nil{
 		response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoPeso, cfg.ImageSmall, cfg.ImageLong)
 		response.SetOutputText(cfg.SpeechErrorNoPeso)
 		response.ShouldSessionEnd = true
