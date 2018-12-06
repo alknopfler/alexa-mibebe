@@ -121,7 +121,7 @@ func (r *RecordToma) GetRecord(context context.Context, request *alexa.Request, 
 		response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoToma, cfg.ImageSmall, cfg.ImageLong)
 		response.SetOutputText(cfg.SpeechErrorNoToma)
 		response.ShouldSessionEnd = true
-
+		return
 	}
 	var toma int
 	for _, val := range listTomas{
