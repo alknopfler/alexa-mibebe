@@ -27,7 +27,7 @@ func (r *RecordToma) AddRecord(context context.Context, request *alexa.Request, 
 	log.Println("register toma")
 
 	ml, _ :=  strconv.Atoi(request.Intent.Slots["mililitros"].Value)
-	email := getEmail(aContext)
+	email := getUserId(aContext)
 
 	if request.DialogState != "COMPLETED" {
 		log.Println("Get into dialog to confirm name 'addPeso intent confirmation'")
@@ -96,7 +96,7 @@ func (r *RecordToma) AddRecord(context context.Context, request *alexa.Request, 
 func (r *RecordToma) GetRecord(context context.Context, request *alexa.Request, session *alexa.Session, aContext *alexa.Context, response *alexa.Response){
 	log.Println("getting the toma")
 
-	email := getEmail(aContext)
+	email := getUserId(aContext)
  	var oldTime, newTime string
 	if request.Intent.Slots["tiempo"].Value == ""{
  		oldTime = getTimeNow()

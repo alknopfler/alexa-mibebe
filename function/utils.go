@@ -4,7 +4,6 @@ import (
 	"crypto/tls"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"time"
@@ -12,11 +11,8 @@ import (
 	"github.com/ericdaugherty/alexa-skills-kit-golang"
 )
 
-func getEmail(aContext *alexa.Context) string{
-	respNew := doRequestOauth(http.MethodGet,aContext.System.APIEndpoint + "/v2/accounts/~current/settings/Profile.email",aContext.System.APIAccessToken,nil)
-	b,_ := ioutil.ReadAll(respNew.Body)
-	log.Println(string(b))
-	return string(b)
+func getUserId(aContext *alexa.Context) string{
+	return aContext.System.User.UserID
 }
 
 func doRequestOauth(method, apiURL, tokenBearer string, body io.Reader ) *http.Response{
