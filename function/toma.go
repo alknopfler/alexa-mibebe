@@ -4,10 +4,10 @@ import (
 	"context"
 	cfg "github.com/alknopfler/alexa-mibebe/config"
 	"github.com/alknopfler/iso8601duration"
-	"github.com/alknopfler/alexa-skills-kit-golang"
 	"log"
 	"strconv"
 	"time"
+	"github.com/ericdaugherty/alexa-skills-kit-golang"
 )
 
 type RecordToma struct {

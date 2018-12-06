@@ -5,10 +5,10 @@ import (
 	cfg "github.com/alknopfler/alexa-mibebe/config"
 	"log"
 	"context"
-	"github.com/alknopfler/alexa-skills-kit-golang"
 	"strconv"
 	"github.com/alknopfler/iso8601duration"
 	"time"
+	"github.com/ericdaugherty/alexa-skills-kit-golang"
 )
 
 const parser = "2006-01-02T15:04:05"

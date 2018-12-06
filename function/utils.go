@@ -3,13 +3,13 @@ package function
 import (
 	"crypto/tls"
 	"fmt"
-	"github.com/alknopfler/alexa-skills-kit-golang"
 	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"time"
 	"strings"
+	"github.com/ericdaugherty/alexa-skills-kit-golang"
 )
 
 func getEmail(aContext *alexa.Context) string{
