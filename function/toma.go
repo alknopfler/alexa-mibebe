@@ -127,8 +127,8 @@ func (r *RecordToma) GetRecord(context context.Context, request *alexa.Request, 
 	for _, val := range listTomas{
 		toma += val.Toma
 	}
-	response.SetStandardCard(cfg.CardTitle, cfg.SpeechTotalToma + strconv.Itoa(toma) + " mililitros", cfg.ImageSmall, cfg.ImageLong)
-	response.SetOutputText(cfg.SpeechTotalToma + strconv.Itoa(toma) + " mililitros")
+	response.SetStandardCard(cfg.CardTitle, cfg.SpeechTotalToma + listTomas[0].Email +" es " + strconv.Itoa(toma) + " mililitros", cfg.ImageSmall, cfg.ImageLong)
+	response.SetOutputText(cfg.SpeechTotalToma + listTomas[0].Email +" es " + strconv.Itoa(toma) + " mililitros")
 	response.ShouldSessionEnd = true
 
 	return

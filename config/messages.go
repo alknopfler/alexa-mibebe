@@ -14,7 +14,7 @@ const (
 	SpeechErrorNoRegistered = "Vale."
 	SpeechNavigate			= "Lo siento, pero esta funcionalidad no está implementada en Mi Bebé. ¿Quiéres hacer otra operación?"
 	SpeechNameis			= "El nombre del bebé registrado es: "
-	SpeechTotalPeso 		= "El peso total acumulado es "
-	SpeechTotalToma 		= "El volumen total es "
+	SpeechTotalPeso 		= "El peso total acumulado de "
+	SpeechTotalToma 		= "El volumen total de "
 	SpeechHelp				= "Puedes registrar un nombre de tu bebé, añadir y consultar un peso, o bien añadir y consultar una toma de tu bebé...¿cómo te puedo ayudar?"
 	)
