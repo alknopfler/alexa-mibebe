@@ -117,7 +117,7 @@ func (r *RecordToma) GetRecord(context context.Context, request *alexa.Request, 
 	log.Println(oldTime, newTime)
 
 	listTomas, err := getRecordsToma("email", email,"\""+oldTime+"\"","\""+newTime+"\"")
-	if err != nil {
+	if err != nil || listTomas == nil{
 		response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoToma, cfg.ImageSmall, cfg.ImageLong)
 		response.SetOutputText(cfg.SpeechErrorNoToma)
 		response.ShouldSessionEnd = true
