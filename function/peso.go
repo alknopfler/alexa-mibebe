@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	cfg "github.com/alknopfler/alexa-mibebe/config"
-	"github.com/alknopfler/iso8601duration"
 	"github.com/ericdaugherty/alexa-skills-kit-golang"
 	"log"
 	"strconv"
@@ -92,15 +91,6 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 
 	email := getUserId(aContext)
 
-	d, err := duration.FromString(request.Intent.Slots["tiempo"].Value)
-	if err != nil {
-		log.Println("error formating date")
-		response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorNoPeso, cfg.ImageSmall, cfg.ImageLong)
-		response.SetOutputText(cfg.SpeechErrorNoPeso)
-		response.ShouldSessionEnd = true
-
-		return
-	}
 	oldTime := "2006-01-02"
 	newTime := getTimeNow()
 	log.Println(oldTime, newTime)
