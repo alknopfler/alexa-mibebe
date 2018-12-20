@@ -114,11 +114,7 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 
 		return
 	}
-	var peso float64
-	for _, val := range listPesos{
-		peso += val.Peso
-	}
-
+	peso := listPesos[len(listPesos)-1].Peso
 	kilos, gramos := splitFloat(fmt.Sprintf("%.3f", peso))
 	response.SetStandardCard(cfg.CardTitle, cfg.SpeechTotalPeso + listPesos[0].Nombre +" es "+ kilos + " kilogramos" + " con "+ gramos + " gramos", cfg.ImageSmall, cfg.ImageLong)
 	response.SetOutputText(cfg.SpeechTotalPeso + listPesos[0].Nombre +" es " + kilos + " kilogramos" + " con "+ gramos + " gramos")
