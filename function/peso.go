@@ -1,14 +1,13 @@
 package function
 
 import (
+	"context"
 	"fmt"
 	cfg "github.com/alknopfler/alexa-mibebe/config"
-	"log"
-	"context"
-	"strconv"
 	"github.com/alknopfler/iso8601duration"
-	"time"
 	"github.com/ericdaugherty/alexa-skills-kit-golang"
+	"log"
+	"strconv"
 )
 
 const parser = "2006-01-02T15:04:05"
@@ -102,7 +101,7 @@ func (r *RecordPeso) GetRecord(context context.Context, request *alexa.Request, 
 
 		return
 	}
-	oldTime := formatNewTime(time.Now().Add(-d.ToDuration()))
+	oldTime := "2006-01-02"
 	newTime := getTimeNow()
 	log.Println(oldTime, newTime)
 
