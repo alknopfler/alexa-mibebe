@@ -131,17 +131,15 @@ func getRecordsPeso(key, value, oldTime, newTime string) ([]RecordPeso, error){
 		log.Println("Got error building expression: "+err.Error())
 		return nil, err
 	}
-	params := &dynamodb.QueryInput{
+	params := &dynamodb.ScanInput{
 		ExpressionAttributeNames:  expr.Names(),
 		ExpressionAttributeValues: expr.Values(),
 		FilterExpression:          expr.Filter(),
 		ProjectionExpression:      expr.Projection(),
-		ScanIndexForward: 		   aws.Bool(false),
-		Limit: 					   aws.Int64(1),
 		TableName:                 aws.String(cfg.DynamoTablePeso),
 	}
 
-	result, err := svc.Query(params)
+	result, err := svc.Scan(params)
 	if err!= nil{
 		log.Println("error scanning")
 	}
