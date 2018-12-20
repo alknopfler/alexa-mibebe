@@ -2,9 +2,9 @@ package function
 
 import (
 	"context"
-	"github.com/alknopfler/alexa-skills-kit-golang"
 	"log"
 	cfg "github.com/alknopfler/alexa-mibebe/config"
+	"github.com/ericdaugherty/alexa-skills-kit-golang"
 )
 
 type RecordName struct {
@@ -19,7 +19,8 @@ func (r *RecordName) newRecord(email,nombre string) RecordName{
 
 func (r *RecordName) AddRecord(context context.Context, request *alexa.Request, session *alexa.Session, aContext *alexa.Context, response *alexa.Response) {
 	log.Println("register new baby")
-
+	p := RecordPeso{}
+	t := RecordToma{}
 	nombre := request.Intent.Slots["nombre"].Value
 
 	if request.DialogState != "COMPLETED" {
@@ -31,7 +32,7 @@ func (r *RecordName) AddRecord(context context.Context, request *alexa.Request, 
 		log.Println(request.Intent.ConfirmationStatus)
 		log.Println(nombre)
 		if	request.Intent.ConfirmationStatus == "CONFIRMED"{
-			exists,err := existRecord("email",getEmail(aContext),cfg.DynamoTableName)
+			exists,err := existRecord("email",getUserId(aContext),cfg.DynamoTableName)
 			if err!= nil {
 				response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorExist, cfg.ImageSmall, cfg.ImageLong)
 				response.SetOutputText(cfg.SpeechErrorExist)
@@ -40,8 +41,11 @@ func (r *RecordName) AddRecord(context context.Context, request *alexa.Request, 
 			}
 			if nombre != "" && !exists{
 
-				err := createRecord(r.newRecord(getEmail(aContext), "\""+nombre+"\""),cfg.DynamoTableName)
-				if err!= nil {
+				err := createRecord(r.newRecord(getUserId(aContext), "\""+nombre+"\""),cfg.DynamoTableName)
+				err1 := createRecord(p.newRecord(getUserId(aContext), "\""+getTimestamp()+"\"", "\""+getTimeNow()+"\"", "\""+nombre+"\"", 0), cfg.DynamoTablePeso)
+				err2 := createRecord(t.newRecord(getUserId(aContext),"\""+getTimestamp()+"\"", "\""+getTimeNow()+"\"", "\""+nombre+"\"", 0), cfg.DynamoTableToma)
+
+				if err != nil || err1 != nil || err2 != nil {
 					response.SetStandardCard(cfg.CardTitle, cfg.SpeechErrorAddRecord, cfg.ImageSmall, cfg.ImageLong)
 					response.SetOutputText(cfg.SpeechErrorAddRecord)
 					response.ShouldSessionEnd = true
@@ -81,7 +85,7 @@ func (r *RecordName) AddRecord(context context.Context, request *alexa.Request, 
 func (r *RecordName) GetRecord(context context.Context, request *alexa.Request, session *alexa.Session, aContext *alexa.Context, response *alexa.Response) {
 	log.Println("Get baby name")
 
-	listNames, err := getRecordsName("email", getEmail(aContext))
+	listNames, err := getRecordsName("email", getUserId(aContext))
 	if err!=nil{
 		log.Println("entra por error")
 	}

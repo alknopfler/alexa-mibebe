@@ -2,7 +2,7 @@ package function
 
 import (
 	"context"
-	"github.com/alknopfler/alexa-skills-kit-golang"
+	"github.com/ericdaugherty/alexa-skills-kit-golang"
 )
 
 type Record interface {
